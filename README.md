@@ -1,1 +1,1 @@
-# zitadel-oidc-vue-example
+# ZITADEL-vue-example
