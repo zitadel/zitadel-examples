@@ -7,7 +7,7 @@ Use `PyJWT` to create privately signed JWT token and access ZITADEL's Management
 ## Setup Python
 1. `python3 -m venv env` with version 3.8.5
 2. `source env/bin/activate`
-3. Confirm with `which python`
+3. Confirm workdir with `which python`
 4. `python3 -m pip install -r requirements.txt`
 
 ## Setup ZITADEL
