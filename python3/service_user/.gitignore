@@ -1,0 +1,10 @@
+
+svc_secret.json
+.vscode
+
+bin/
+include/
+lib/
+lib64/
+share/
+lib64
