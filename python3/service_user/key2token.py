@@ -60,6 +60,7 @@ def serviceuser_json(input_path):
 def jwt2token(jwt, dryrun=False):
 
     url = "https://api.zitadel.ch/oauth/v2/token"
+    # Don't change the scope when using ZITADEL Cloud
     data = {
         'grant_type': 'urn:ietf:params:oauth:grant-type:jwt-bearer', 
         'scope': 'openid profile urn:zitadel:iam:org:project:id:69234237810729019:aud',
