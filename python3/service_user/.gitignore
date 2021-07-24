@@ -2,9 +2,6 @@
 service_user.json
 .vscode
 
-bin/
-include/
-lib/
-lib64/
-share/
-lib64
+__pycache__
+
+env/
