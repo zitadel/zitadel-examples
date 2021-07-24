@@ -91,10 +91,13 @@ def key2jwt(keyId, userId, key, verbose=False):
 
     private_key = key
 
-    iat_timestamp = datetime.utcnow() + timedelta(seconds=5)
+    utc = datetime.utcnow()
+
+    iat_timestamp = utc + timedelta(minutes=60, seconds=5)
     exp_timestamp = iat_timestamp + timedelta(minutes=120)
 
-    print(iat_timestamp)
+    if verbose:
+        print(iat_timestamp)
 
     body = {
         "aud": "https://issuer.zitadel.ch",
