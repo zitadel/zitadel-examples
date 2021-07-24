@@ -16,6 +16,7 @@ cache_opts = {
 cache = CacheManager(**parse_cache_config_options(cache_opts))
 
 @cache.cache('token_func', expire=3600)
+
 def auth_header(): 
     access_token, token_type, expires_in = key2token.get_token("./service_user.json")
     return '{} {}'.format(token_type, access_token)
@@ -23,6 +24,7 @@ def auth_header():
 
 ## add clear-cache flag
 my_parser = argparse.ArgumentParser(description='')
+my_parser.add_argument('-orgid', metavar='orgid', type=str, help='your org id') # 71641630146358541
 my_parser.add_argument('-nc', '--no-cache', action='store_true', help='Don\'t use cached tokens')
 my_parser.add_argument('-d', '--dry-run', action='store_true', help='output request instead of sending')
 args = my_parser.parse_args()
@@ -32,7 +34,7 @@ data = {
 }
 
 headers = {
-    'x-zitadel-orgid': '71641630146358541',
+    'x-zitadel-orgid': args.orgid,
     'Authorization': auth_header()
 }
 
