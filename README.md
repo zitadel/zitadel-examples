@@ -2,9 +2,7 @@
 
 This repo provides examples of how you can integrate different languages and frameworks with ZITADEL.
 
-## Vue.js Open ID Connect 1.0
-
-## Pyhton 3.8
+## Python 3.8
 - Exchange JWT token signed with private key for authentication token
 - Access ZITADEL's Management API
 
