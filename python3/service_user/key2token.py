@@ -86,6 +86,8 @@ def jwt2token(jwt, url, scope, dryrun=False):
 
 def key2jwt(keyId, userId, private_key, audience, verbose=False):
 
+    ALGORITHM = "RS256"
+
     utc = datetime.utcnow()
 
     iat_timestamp = utc + timedelta(minutes=60, seconds=5)
@@ -104,13 +106,13 @@ def key2jwt(keyId, userId, private_key, audience, verbose=False):
 
     headers = {
             'kid': keyId,
-            'alg': "RS256"
+            'alg': ALGORITHM
     }
 
     encoded = jwt.encode(
         body,
         private_key, 
-        algorithm="RS256", 
+        algorithm=ALGORITHM, 
         headers=headers
         )
     if verbose: 
