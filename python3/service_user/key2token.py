@@ -8,41 +8,39 @@ import json
 
 def main():
 
+    TOKEN_ENDPOINT = "https://api.zitadel.ch/oauth/v2/token"
+    TOKEN_SCOPE = "openid profile urn:zitadel:iam:org:project:id:69234237810729019:aud" # Don't change this ID for ZITADEL Cloud, see https://docs.zitadel.ch/docs/apis/openidoauth/scopes#reserved-scopes
+    JWT_AUDIENCE = "https://issuer.zitadel.ch"
+
     my_parser = argparse.ArgumentParser(description='Create JWT and exchange for OAuth Token')
     # Mandatory
     my_parser.add_argument('Path', metavar='path', type=str, help='path to service user json file')
+
     # Optional arguments
     my_parser.add_argument('-d', '--dry-run', action='store_true', help='output request instead of sending')
     my_parser.add_argument('-v', '--verbose', action='store_true', help='verbose output, be careful!')
     args = my_parser.parse_args()
 
-    opt_dryrun = True if args.dry_run else False
-    opt_verbose = True if args.verbose else False
-
-    access_token, token_type, expires_in = get_token(args.Path, opt_verbose, opt_dryrun)
+    access_token, token_type, expires_in = get_token(args.Path, TOKEN_ENDPOINT, TOKEN_SCOPE, JWT_AUDIENCE, args.verbose, args.dry_run)
 
     print('Authorization: {} {}\r\nexpires at (UTC): {} ({}s)'.format(token_type, access_token, datetime.now(tz=timezone.utc) + timedelta(seconds=expires_in), expires_in))
 
 
-def get_token(path, verbose=False, dryrun=False): 
+def get_token(path, token_url, token_scope, jwt_audience, verbose=False, dryrun=False): 
 
     # load key from json
     keyId, key, userId = serviceuser_json(path)
 
     # construct jwt
-    jwt = key2jwt(keyId=keyId, userId=userId, key=key, verbose=verbose)
+    jwt = key2jwt(keyId, userId, key, jwt_audience, verbose)
 
     # exchange jwt for access token
-    access_token, token_type, expires_in = jwt2token(jwt, dryrun)
+    access_token, token_type, expires_in = jwt2token(jwt, token_url, token_scope, dryrun)
 
     if verbose:
         print('Authorization: {} {}\r\nexpires at (UTC): {} ({}s)'.format(token_type, access_token, datetime.now(tz=timezone.utc) + timedelta(seconds=expires_in), expires_in))
 
     return access_token, token_type, expires_in
-
-    # TODO url, aud, scope via cmdline 
-    # ... via config file
-    # import script and watch expiry
 
 def serviceuser_json(input_path): 
     path = Path(input_path)
@@ -52,18 +50,17 @@ def serviceuser_json(input_path):
 
     with open(path, "r") as read_file: 
         data = json.load(read_file)
+        if not {"type", "keyId", "key", "userId"} <= data.keys(): 
+            raise ValueError('Wrong file format')
         if not data['type'] == 'serviceaccount':
-            print('Not a service account')
-            sys.exit()
+            raise ValueError('File does not contain a service account')
     return data['keyId'], data['key'], data['userId']
 
-def jwt2token(jwt, dryrun=False):
+def jwt2token(jwt, url, scope, dryrun=False):
 
-    url = "https://api.zitadel.ch/oauth/v2/token"
-    # Don't change the scope when using ZITADEL Cloud
     data = {
         'grant_type': 'urn:ietf:params:oauth:grant-type:jwt-bearer', 
-        'scope': 'openid profile urn:zitadel:iam:org:project:id:69234237810729019:aud',
+        'scope': scope,
         'assertion': jwt
     }
     headers = {
@@ -83,14 +80,16 @@ def jwt2token(jwt, dryrun=False):
         res = requests.post(url, data, headers=headers)
         if res.status_code == 200: 
             data = json.loads(res.text)
+            if not {"access_token", "token_type", "expires_in"} <= data.keys(): 
+                raise ValueError('Unexpected response')
             return data['access_token'], data['token_type'], data['expires_in']
         else: 
-            print(res.text)
+            raise ValueError(res.text)
 
 
-def key2jwt(keyId, userId, key, verbose=False):
+def key2jwt(keyId, userId, private_key, audience, verbose=False):
 
-    private_key = key
+    ALGORITHM = "RS256"
 
     utc = datetime.utcnow()
 
@@ -101,7 +100,7 @@ def key2jwt(keyId, userId, key, verbose=False):
         print(iat_timestamp)
 
     body = {
-        "aud": "https://issuer.zitadel.ch",
+        "aud": audience,
         "iss": userId,
         "sub": userId,
         "exp": int(exp_timestamp.timestamp()),
@@ -110,17 +109,17 @@ def key2jwt(keyId, userId, key, verbose=False):
 
     headers = {
             'kid': keyId,
-            'alg': "RS256"
+            'alg': ALGORITHM
     }
 
     encoded = jwt.encode(
         body,
         private_key, 
-        algorithm="RS256", 
+        algorithm=ALGORITHM, 
         headers=headers
         )
     if verbose: 
-        print('body: {}\r\nkid: {}\r\nkey: {}\r\nencoded:{}\r\n\r\n'.format(body, headers, key, encoded))
+        print('body: {}\r\nkid: {}\r\nkey: {}\r\nencoded:{}\r\n\r\n'.format(body, headers, private_key, encoded))
 
     return encoded
 

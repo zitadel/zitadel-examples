@@ -24,7 +24,7 @@ def auth_header():
 
 ## add clear-cache flag
 my_parser = argparse.ArgumentParser(description='')
-my_parser.add_argument('-orgid', metavar='orgid', type=str, help='your org id') # 71641630146358541
+my_parser.add_argument('-orgid', metavar='orgid', type=str, help='your org id') # eg, 71641630146358541
 my_parser.add_argument('-nc', '--no-cache', action='store_true', help='Don\'t use cached tokens')
 my_parser.add_argument('-d', '--dry-run', action='store_true', help='output request instead of sending')
 args = my_parser.parse_args()
