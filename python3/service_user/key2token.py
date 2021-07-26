@@ -50,9 +50,10 @@ def serviceuser_json(input_path):
 
     with open(path, "r") as read_file: 
         data = json.load(read_file)
+        if not {"type", "keyId", "key", "userId"} <= data.keys(): 
+            raise ValueError('Wrong file format')
         if not data['type'] == 'serviceaccount':
-            print('Not a service account')
-            sys.exit()
+            raise ValueError('File does not contain a service account')
     return data['keyId'], data['key'], data['userId']
 
 def jwt2token(jwt, url, scope, dryrun=False):
@@ -79,9 +80,11 @@ def jwt2token(jwt, url, scope, dryrun=False):
         res = requests.post(url, data, headers=headers)
         if res.status_code == 200: 
             data = json.loads(res.text)
+            if not {"access_token", "token_type", "expires_in"} <= data.keys(): 
+                raise ValueError('Unexpected response')
             return data['access_token'], data['token_type'], data['expires_in']
         else: 
-            print(res.text)
+            raise ValueError(res.text)
 
 
 def key2jwt(keyId, userId, private_key, audience, verbose=False):
