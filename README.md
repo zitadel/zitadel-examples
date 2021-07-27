@@ -10,7 +10,7 @@ This repo provides examples of how you can integrate different languages and fra
 - Authentication Code Flow with PKCE
 - Fetch data from userinfo endpoint
 
-## Python 3.8
+## [Python 3.8](./python3)
 - Exchange JWT token signed with private key for authentication token
 - Access ZITADEL's Management API
 
