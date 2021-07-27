@@ -2,6 +2,14 @@
 
 This repo provides examples of how you can integrate different languages and frameworks with ZITADEL.
 
+## [Angular](./angular)
+- Authentication Code Flow with PKCE
+- Fetch data from userinfo endpoint
+
+## [NextJS](./nextjs)
+- Authentication Code Flow with PKCE
+- Fetch data from userinfo endpoint
+
 ## Python 3.8
 - Exchange JWT token signed with private key for authentication token
 - Access ZITADEL's Management API
