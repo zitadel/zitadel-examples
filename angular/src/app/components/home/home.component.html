@@ -1,0 +1,14 @@
+<h1>Welcome to our Zitadel Authentication template</h1>
+
+<p>This shows you how to authenticate as a user and retrieve authentication information from OIDC endpoint.</p>
+<br><br>
+
+<ng-container *ngIf="(hasValidAccessToken) as isAuthenticated; else notAuthenticated">
+    <p><strong>You are authenticated</strong></p>
+    <button [routerLink]="['/user']">Show OIDC User</button>
+</ng-container>
+
+<ng-template #notAuthenticated>
+    <p><strong>You are not authenticated</strong></p>
+    <button (click)="tiggerAuthentication()">Authenticate</button>
+</ng-template>

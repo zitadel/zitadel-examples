@@ -1,0 +1,5 @@
+<p><strong>Successfully authenticated</strong></p>
+
+<p *ngIf="user$ | async as user">{{user | json}}</p>
+
+<button (click)="triggerSignout()">signout</button>
