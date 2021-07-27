@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+button {
+    display: block;
+    margin: auto;
+    background: rgb(203, 43, 57);
+    color: white;
+    border-radius: 6px;
+    height: 36px;
+    padding: .5rem 1rem;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    
+    &:not([disabled]) {
+        cursor: pointer;
+    }
+
+    &:hover {
+        border: none;
+        outline: none;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
+    }
+
+    &:active {
+        background: rgb(206, 56, 68);
+        border: none;
+        outline: none;
+    }
+
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
