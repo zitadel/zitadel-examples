@@ -17,7 +17,6 @@ const authConfig: AuthConfig = {
     responseType: 'code',
     oidc: true,
     clientId: '98809213261836203@angular-test', // replace with your appid
-    dummyClientSecret: 'BGCMIMBzXNt725t8rDN8Dh7lc70SksLjMrHquNjSzB5hDluC0BeK1NdOdVlwtAJC', // replace with your appsecret required by library
     issuer: 'https://issuer.zitadel.dev', // you may use https://issuer.zitadel.ch
     redirectUri: 'http://localhost:4200/auth/callback',
     postLogoutRedirectUri: 'http://localhost:4200/signedout',
