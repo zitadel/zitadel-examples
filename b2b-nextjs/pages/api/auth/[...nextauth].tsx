@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth from 'next-auth';
 
 export default NextAuth({
   session: {
@@ -27,13 +27,6 @@ export default NextAuth({
       session.user = token.user;
       return session;
     },
-    // signIn: async function signIn(users, account, metadata) {
-    //     console.log('singin');
-    //     console.log(users, account, metadata);
-
-    //     users.accessToken = account.accessToken;
-    //     return true;
-    // },
   },
   providers: [
     {

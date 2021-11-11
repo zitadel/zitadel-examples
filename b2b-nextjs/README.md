@@ -3,7 +3,6 @@ This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business
 - A user of the customer should see all granted projects in the portal
 - A admin user of the customers sees a list of customer's users (could be expanded to make roles editable)
 
-
 ## Getting Started
 
 To run this sample locally you need to install dependencies first.
@@ -45,9 +44,12 @@ Now clone this project and navigate to its root folder. Create a file `.env.loca
 NEXTAUTH_URL=http://localhost:3000
 ZITADEL_CLIENT_ID={YourClientID}
 SERVICE_ACCOUNT_SECRET={YourServiceAccountSecret}
+ORG_ID=ORG_ID={YourOrgId}
+PROJECT_ID={YourProjectId}
 ```
 
-Take your previously copied clientId and paste it after `ZITADEL_CLIENT_ID=`.
+Make sure to insert your previously created orgId, and project.
+and copy your apps clientId and paste it after `ZITADEL_CLIENT_ID=`.
 
 ### Service User
 

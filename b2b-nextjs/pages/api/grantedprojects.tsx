@@ -17,7 +17,7 @@ function getGrantedProjectsOfUser(
           return fetch(request, {
             headers: {
               authorization: `Bearer ${token.access_token}`,
-              "x-zitadel-org": "129336476931515070", //orgId,
+              "x-zitadel-org": process.env.ORG_ID,
               "content-type": "application/json",
             },
             method: "POST",

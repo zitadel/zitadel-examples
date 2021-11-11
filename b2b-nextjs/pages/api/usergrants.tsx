@@ -28,7 +28,7 @@ function getUserGrants(
               queries: [
                 {
                   projectIdQuery: {
-                    projectId: "129954148358614443",
+                    projectId: process.env.PROJECT_ID,
                   },
                 },
                 {
