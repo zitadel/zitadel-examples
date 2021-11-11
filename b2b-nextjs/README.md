@@ -1,4 +1,8 @@
-This is a demo showcasing the use of B2B (Business to Business).
+This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business) context, where a company is providing a customer portal to their customers:
+
+- A user of the customer should see all granted projects in the portal
+- A admin user of the customers sees a list of customer's users (could be expanded to make roles editable)
+
 
 ## Getting Started
 
