@@ -55,7 +55,7 @@ To make this application work you need a service user which loads granted-projec
 Navigate to `Service-Users` in the side navigation panel of Console and create a new service-user.
 Let's set its username to `nextjs` and its name to `NextJS`. Then press `create`.
 
-On the detail page, add a new Key, set an optional expiration date and download the generated JSON file.
+On the detail page, add a new key, set an optional expiration date and download the generated JSON file.
 Copy the content of this file right after `SERVICE_ACCOUNT_SECRET=` in your configuration file.
 
 Back in Console, click onto the plus sign in the right sidepanel to grant access to your service user.
