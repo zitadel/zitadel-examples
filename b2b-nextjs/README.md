@@ -43,7 +43,7 @@ Now clone this project and navigate to its root folder. Create a file `.env.loca
 
 ```
 NEXTAUTH_URL=http://localhost:3000
-ZITADEL_CLIENT_ID=129954167266602411@portal
+ZITADEL_CLIENT_ID={YourClientID}
 SERVICE_ACCOUNT_SECRET=
 ```
 
