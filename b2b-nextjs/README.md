@@ -70,7 +70,7 @@ To setup the needed roles for your project, navigate to your Portal project, and
 | admin  | Administrator |       | The administrator, allowed to read granted projects and to user grants |
 | reader | Reader        |       | A user who is allowed to read his organizations granted projects only  |
 
-Now make sure to enable `Assert Roles on Authentication` above the role table. This makes sure that roles are set in your OIDC ID Token which is used by the application to enable UI components.
+Now make sure to enable `Assert Roles on Authentication` above the role table. This makes sure that roles, which is used by the application to enable UI components, are set in your OIDC ID Token.
 
 ## What does it do?:
 
