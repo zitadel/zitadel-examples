@@ -16,6 +16,8 @@ This repo provides examples of how you can integrate different languages and fra
 
 - Authentication Code Flow with PKCE
 - Load sessions and login with prompt
+- Organization context
+- Service users
 
 ## [Python 3.8](./python3)
 
