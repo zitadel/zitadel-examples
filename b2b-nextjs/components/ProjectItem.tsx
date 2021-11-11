@@ -1,10 +1,10 @@
-import { Menu, Transition } from "@headlessui/react";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Menu, Transition } from '@headlessui/react';
+import { DotsVerticalIcon } from '@heroicons/react/solid';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { Fragment } from 'react';
 
-import localizedDate from "../lib/localized-date";
+import localizedDate from '../lib/localized-date';
 
 const ReactTooltip = dynamic(() => import("react-tooltip"), {
   ssr: false,
@@ -107,23 +107,6 @@ export default function ProjectItem({
                   )}
                 </Menu.Item>
               </div>
-              {/* <div className="px-1 py-1">
-                                    <Menu.Item>
-                                        {({ active }) => (
-                                            <button
-                                                className={`${active ? 'text-red-600 dark:text-white' : 'text-gray-600 dark:text-gray-200'
-                                                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                                            >
-                                                {active ? (
-                                                    <i className="text-2xl las la-trash mr-2"></i>
-                                                ) : (
-                                                    <i className="text-2xl las la-trash mr-2"></i>
-                                                )}
-                                                Delete
-                                            </button>
-                                        )}
-                                    </Menu.Item>
-                                </div> */}
             </Menu.Items>
           </Transition>
         </Menu>

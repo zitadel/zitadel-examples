@@ -1,5 +1,4 @@
 import { signIn, useSession } from 'next-auth/react';
-import { useContext } from 'react';
 
 export default function AuthCheck(props: any) {
   const { data: session } = useSession();
