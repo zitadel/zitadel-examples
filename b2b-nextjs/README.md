@@ -59,7 +59,7 @@ On the detail page, add a new key, set an optional expiration date and download 
 Copy the content of this file right after `SERVICE_ACCOUNT_SECRET=` in your configuration file.
 
 Back in Console, click onto the plus sign in the right sidepanel to grant access to your service user.
-Select `owned project`, search for `B2B-Demo` and select `PROJECT_OWNER_VIEWER` as the Management role.
+Select `owned project`, search for `B2B-Demo` and select `PROJECT_OWNER_VIEWER` as the management role.
 
 ### Roles
 
