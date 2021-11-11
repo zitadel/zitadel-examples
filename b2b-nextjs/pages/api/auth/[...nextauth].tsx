@@ -7,8 +7,6 @@ export default NextAuth({
   },
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
-      // Add access_token to the token right after signin
-      // console.log('jwtcallback', user, profile, isNewUser);
       if (profile?.sub) {
         token.sub = profile.sub;
       }

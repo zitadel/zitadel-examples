@@ -12,7 +12,6 @@ function getGrantedProjectsOfUser(
     .then((isAllowed) => {
       if (isAllowed) {
         return requestAccessToken().then((token: BearerToken) => {
-          // console.log(token);
           const request = `https://api.zitadel.ch/management/v1/projectgrants/_search`;
           return fetch(request, {
             headers: {

@@ -34,47 +34,47 @@ NextAuth.js exposes a REST API which is used by your client.
 To setup your configuration, create a file called [...nextauth].tsx in `pages/api/auth`.
 
 ```ts
-import NextAuth from 'next-auth';
+import NextAuth from "next-auth";
 
 export const ZITADEL = {
-    id: "zitadel",
-    name: "zitadel",
-    type: "oauth",
-    version: "2.0",
-    scope: "openid profile email",
-    params: { response_type: "code", grant_type: "authorization_code" },
-    authorizationParams: { grant_type: "authorization_code", response_type: "code" },
-    accessTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
-    requestTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
-    authorizationUrl: "https://accounts.zitadel.dev/oauth/v2/authorize",
-    profileUrl: "https://api.zitadel.dev/oauth/v2/userinfo",
-    protection: "pkce",
-    async profile(profile, tokens) {
-        console.log(profile, tokens);
-        return {
-            id: profile.sub,
-            name: profile.name,
-            email: profile.email,
-            image: profile.picture
-        };
-    },
-    clientId: process.env.ZITADEL_CLIENT_ID,
-    session: {
-        jwt: true,
-    },
+  id: "zitadel",
+  name: "zitadel",
+  type: "oauth",
+  version: "2.0",
+  scope: "openid profile email",
+  params: { response_type: "code", grant_type: "authorization_code" },
+  authorizationParams: {
+    grant_type: "authorization_code",
+    response_type: "code",
+  },
+  accessTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
+  requestTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
+  authorizationUrl: "https://accounts.zitadel.dev/oauth/v2/authorize",
+  profileUrl: "https://api.zitadel.dev/oauth/v2/userinfo",
+  protection: "pkce",
+  async profile(profile, tokens) {
+    return {
+      id: profile.sub,
+      name: profile.name,
+      email: profile.email,
+      image: profile.picture,
+    };
+  },
+  clientId: process.env.ZITADEL_CLIENT_ID,
+  session: {
+    jwt: true,
+  },
 };
 
 export default NextAuth({
-    providers: [
-        ZITADEL
-    ],
+  providers: [ZITADEL],
 });
 ```
 
 Replace the endpoints `https://api.zitadel.dev/` with `https://api.zitadel.ch/` if your using a ZITADEL CLOUD tier or your own endpoint if your using a self hosted ENTERPRISE tier respectively.
 
 We recommend using the Authentication Code flow secured by PKCE for the Authentication flow.
-To be able to connect to ZITADEL, navigate to your [Console Projects](https://console.zitadel.ch/projects) create or select an existing project and add your app selecting WEB, then PKCE, and then add `http://localhost:3000/api/auth/callback/zitadel` as redirect url to your app. 
+To be able to connect to ZITADEL, navigate to your [Console Projects](https://console.zitadel.ch/projects) create or select an existing project and add your app selecting WEB, then PKCE, and then add `http://localhost:3000/api/auth/callback/zitadel` as redirect url to your app.
 
 For simplicity reasons we set the default to the one that next-auth provides us. You'll be able to change the redirect later if you want to.
 
@@ -123,13 +123,14 @@ To allow session state to be shared between pages - which improves performance, 
 Take a loot at the template `_app.tsx`.
 
 ```ts
-import { Provider } from 'next-auth/client';
+import { Provider } from "next-auth/client";
 
 function MyApp({ Component, pageProps }) {
-    return <Provider
-        session={pageProps.session} >
-        <Component {...pageProps} />
-    </Provider>;
+  return (
+    <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 export default MyApp;

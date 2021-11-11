@@ -1,9 +1,9 @@
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/outline";
-import { getSession } from "next-auth/react";
-import { Fragment, useEffect, useState } from "react";
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, SelectorIcon } from '@heroicons/react/outline';
+import { getSession } from 'next-auth/react';
+import { Fragment, useEffect, useState } from 'react';
 
-import orgStore from "../lib/org";
+import orgStore from '../lib/org';
 
 export type ZitadelOrg = {
   id: string;
@@ -17,7 +17,6 @@ const orgMap = (res: any): ZitadelOrg[] => {
 export default function OrgContext() {
   const fetcher = async (url: string, cb: any) => {
     const session = (await getSession()) as any;
-    console.log(session);
     return fetch(`${url}`, {
       method: "POST",
       headers: {
@@ -41,7 +40,6 @@ export default function OrgContext() {
       orgMap
     ).then((orgs) => {
       if (!org && orgs && orgs.length) {
-        console.log(orgs);
         setOrgs(orgs);
         setOrg(orgs[0]);
       }

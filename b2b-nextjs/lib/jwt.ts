@@ -20,15 +20,12 @@ export function requestAccessToken(): Promise<BearerToken> {
     process.env.SERVICE_ACCOUNT_SECRET as any
   );
 
-  //   console.log("secret", secret);
-  // console.log(secret);
   const jwtPayload = {
     iss: secret.userId,
     sub: secret.userId,
     aud: "https://issuer.zitadel.ch",
     alg: "RS256",
     kid: secret.keyId,
-    // iat: Math.floor(Date.now() / 1000) - 30, // backdate 30s
     exp: Math.floor(Date.now() / 1000) + 30 * 60,
   };
 
@@ -44,7 +41,6 @@ export function requestAccessToken(): Promise<BearerToken> {
 
   const url = "https://api.zitadel.ch/oauth/v2/token?";
 
-  // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
   return fetch(
     url +
       new URLSearchParams({

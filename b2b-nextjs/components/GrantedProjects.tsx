@@ -1,45 +1,11 @@
-import { getSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
+import { getSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
-import orgStore from "../lib/org";
-import ProjectItem from "./ProjectItem";
+import orgStore from '../lib/org';
+import ProjectItem from './ProjectItem';
 
 export default function GrantedProjects() {
-  //   const [projects, setProjects] = useState([]);
-
-  //   const org = orgStore((state) => (state as any).org);
-
-  //   useEffect(() => {
-  //     const currentOrg = orgStore.getState().org;
-
-  //     if (currentOrg) {
-  //       getSession().then((session: any) => {
-  //         fetch(`/api/grantedprojects`, {
-  //           method: "GET",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             authorization: `Bearer ${session.accessToken}`,
-  //             orgid: currentOrg.id,
-  //             userid: session.sub,
-  //           },
-  //         })
-  //           .then((res) => res.json())
-  //           .then((resp) => {
-  //             console.log(resp);
-  //             return resp.result ?? [];
-  //           })
-  //           .then((projectResult) => {
-  //             console.log(projectResult);
-  //             setProjects(projectResult);
-  //           })
-  //           .catch((error) => {
-  //             console.error(error);
-  //           });
-  //       });
-  //     }
-  //   }, [org]);
-
   const fetcher = async (url: string) => {
     const session = (await getSession()) as any;
     const org = orgStore.getState().org;

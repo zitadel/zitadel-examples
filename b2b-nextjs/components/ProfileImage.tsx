@@ -1,7 +1,7 @@
-import { Menu, Transition } from "@headlessui/react";
-import { LogoutIcon, PencilIcon } from "@heroicons/react/outline";
-import { getSession, signIn, signOut } from "next-auth/react";
-import { Fragment, useEffect, useState } from "react";
+import { Menu, Transition } from '@headlessui/react';
+import { LogoutIcon, PencilIcon } from '@heroicons/react/outline';
+import { getSession, signIn, signOut } from 'next-auth/react';
+import { Fragment, useEffect, useState } from 'react';
 
 export default function ProfileImage({ user }: { user?: any | null }) {
   const sessionMap = (res: any): any[] => {
@@ -10,7 +10,6 @@ export default function ProfileImage({ user }: { user?: any | null }) {
 
   const fetcher = async (url: string, cb: any) => {
     const session = (await getSession()) as any;
-    console.log(session);
     return fetch(`${url}`, {
       method: "POST",
       headers: {
@@ -28,9 +27,7 @@ export default function ProfileImage({ user }: { user?: any | null }) {
       "https://api.zitadel.ch/auth/v1/users/me/sessions/_search",
       sessionMap
     ).then((sessions) => {
-      console.log(sessions);
       if (sessions && sessions.length) {
-        console.log(sessions);
         setSessions(sessions);
       }
     });

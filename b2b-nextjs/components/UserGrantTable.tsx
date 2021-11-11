@@ -1,7 +1,7 @@
-import { getSession } from "next-auth/react";
-import useSWR from "swr";
+import { getSession } from 'next-auth/react';
+import useSWR from 'swr';
 
-import orgStore from "../lib/org";
+import orgStore from '../lib/org';
 
 export default function UserGrantTable() {
   const fetcher = async (url: string) => {
@@ -28,7 +28,6 @@ export default function UserGrantTable() {
     (url) => fetcher(url)
   );
 
-  console.log(usergrants);
   return (
     <div className="max-w-7xl mx-auto px-6 pt-10">
       <h2 className="text-3xl mb-2">User Grants</h2>
