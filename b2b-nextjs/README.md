@@ -42,19 +42,24 @@ Now clone this project and navigate to its root folder. Create a file `.env.loca
 
 ```
 NEXTAUTH_URL=http://localhost:3000
-ZITADEL_CLIENT_ID={YourClientID}
-SERVICE_ACCOUNT_SECRET={YourServiceAccountSecret}
 ORG_ID={YourOrgId}
 PROJECT_ID={YourProjectId}
+ZITADEL_CLIENT_ID={YourClientID}
+SERVICE_ACCOUNT_SECRET={YourServiceAccountSecret}
 ```
 
-Make sure to insert your previously created orgId, and project.
-and copy your apps clientId and paste it after `ZITADEL_CLIENT_ID=`.
+`ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console and click on "Organisation" on the left sidepanel. `{YourOrgId}` is displayed in right sidepanel labeled as "Resource Id".
+
+`PROJECT_ID`: You can find `{YourProjectId}` by clicking on "Projects" on the sidepanel and select the Project `Portal`. `{YourProjectId}` is displayed in the right sidepanel labeled as "Resource Id".
+
+`ZITADEL_CLIENT_ID`: Having the project `Portal` selected, click on the Application `Web`. `{YourClientID}` is displayed in the top-center, labeled as "Client Id".
+
+`SERVICE_ACCOUNT_SECRET`: Setup a service user and copy the account secret here (see below)
 
 ### Service User
 
 To make this application work you need a service user which loads granted-projects and user-grants for you.
-Navigate to `Service-Users` in the side navigation panel of Console and create a new service-user.
+In the B2B-Demo organization, navigate to `Service-Users` in the side navigation panel of Console and create a new service-user.
 Let's set its username to `nextjs` and its name to `NextJS`. Then press `create`.
 
 On the detail page, add a new key, set an optional expiration date and download the generated JSON file.
@@ -73,6 +78,20 @@ To setup the needed roles for your project, navigate to your Portal project, and
 | reader | Reader        |       | A user who is allowed to read his organizations granted projects only  |
 
 Now make sure to enable `Assert Roles on Authentication` above the role table. This makes sure that roles, which is used by the application to enable UI components, are set in your OIDC ID Token.
+
+### Delegate the project to another organization
+
+Create a new organization in Console. Easiest way is to use the organization dropdown on the top left. Let's call this new organization `B2B-Demo-Customer`. 
+
+Switch to the `B2B-Demo` organization, select Projects in the left sidepanel, and click on `Portal`. [Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `b2b-demo-customer.zitadel.ch`.
+
+Now switch back to the organization `B2B-Demo-Customer`, [create a new user](https://docs.zitadel.ch/docs/manuals/user-register) in this organization. Select Granted Projects on the left side panel and click on `Portal`. Add an authorization to the newly created user.
+
+### Login
+
+You should be able to login with the user created in the organization `B2B-Demo-Customer`and see all granted projects.
+
+Switch to authorizations to view all users and their roles. You may extend the application here to make role-assignment possible within the portal.
 
 ## What does it do?:
 
