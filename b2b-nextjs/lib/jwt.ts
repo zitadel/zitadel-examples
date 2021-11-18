@@ -58,7 +58,6 @@ export function requestAccessToken(): Promise<BearerToken> {
     }
   )
     .then((resp) => resp.json())
-    .then(handleFetchErrors)
     .catch((error) => {
       console.error("get token error", error);
       return Promise.reject(error);
