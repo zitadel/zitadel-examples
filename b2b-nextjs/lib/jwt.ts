@@ -26,6 +26,7 @@ export function requestAccessToken(): Promise<BearerToken> {
     aud: "https://issuer.zitadel.ch",
     alg: "RS256",
     kid: secret.keyId,
+    iat: Math.floor(Date.now() / 1000) - 5, // offset the time see caos/zitadel #2704
     exp: Math.floor(Date.now() / 1000) + 30 * 60,
   };
 
@@ -57,6 +58,7 @@ export function requestAccessToken(): Promise<BearerToken> {
     }
   )
     .then((resp) => resp.json())
+    .then(handleFetchErrors)
     .catch((error) => {
       console.error("get token error", error);
       return Promise.reject(error);
