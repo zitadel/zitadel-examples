@@ -26,6 +26,7 @@ export function requestAccessToken(): Promise<BearerToken> {
     aud: "https://issuer.zitadel.ch",
     alg: "RS256",
     kid: secret.keyId,
+    iat: Math.floor(Date.now() / 1000) - 5, // offset the time see caos/zitadel #2704
     exp: Math.floor(Date.now() / 1000) + 30 * 60,
   };
 
