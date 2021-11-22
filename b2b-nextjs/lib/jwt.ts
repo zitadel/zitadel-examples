@@ -47,7 +47,7 @@ export function requestAccessToken(): Promise<BearerToken> {
       new URLSearchParams({
         grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
         scope:
-          "openid profile email preferred_username urn:zitadel:iam:org:project:id:69234237810729019:aud",
+          "openid profile email urn:zitadel:iam:org:project:id:69234237810729019:aud",
         assertion: token,
       }),
     {
