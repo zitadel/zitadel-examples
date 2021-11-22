@@ -51,6 +51,7 @@ export default NextAuth({
           email: profile.email,
           image: profile.picture,
           roles: profile["urn:zitadel:iam:org:project:roles"],
+          preferred_username: profile.preferred_username,
         };
         return prof;
       },
