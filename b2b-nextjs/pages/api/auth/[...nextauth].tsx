@@ -33,7 +33,7 @@ export default NextAuth({
       type: "oauth",
       version: "2.0",
       scope:
-        "openid profile email urn:zitadel:iam:org:project:id:69234237810729019:aud",
+        "openid profile email preferred_username urn:zitadel:iam:org:project:id:69234237810729019:aud",
       params: { grant_type: "authorization_code" },
       authorizationParams: {
         grant_type: "authorization_code",
@@ -51,6 +51,7 @@ export default NextAuth({
           email: profile.email,
           image: profile.picture,
           roles: profile["urn:zitadel:iam:org:project:roles"],
+          preferred_username: profile.preferred_username
         };
         return prof;
       },

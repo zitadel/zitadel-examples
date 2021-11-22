@@ -17,7 +17,7 @@ export default function UserGrant() {
   return (
     session && (
       <div className="py-4">
-        You have{" "}
+        You ({session.user.preferred_username}) have{" "}
         <strong
           className={`${
             roles && roles.length ? "text-green-500" : "text-red-500"
