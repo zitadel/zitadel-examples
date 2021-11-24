@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
-import { BearerToken, hasRole, requestAccessToken } from '../../lib/jwt';
-import { handleFetchErrors } from '../../lib/middleware';
+import { BearerToken, hasRole, requestAccessToken } from "../../lib/jwt";
+import { handleFetchErrors } from "../../lib/middleware";
 
 function getUserGrants(
   orgId: string,
@@ -15,7 +15,7 @@ function getUserGrants(
           return fetch(request, {
             headers: {
               authorization: `Bearer ${token.access_token}`,
-              "x-zitadel-org": "129336476931515070", //orgId,
+              "x-zitadel-org": process.env.ORG_ID,
               "content-type": "application/json",
             },
             method: "POST",
@@ -31,9 +31,6 @@ function getUserGrants(
                   },
                 },
                 {
-                  // projectGrantIdQuery: {
-                  //   projectGrantId: 132244672369190498,
-                  // },
                   withGrantedQuery: {
                     withGranted: true,
                   },
