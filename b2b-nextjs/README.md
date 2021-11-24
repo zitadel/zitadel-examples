@@ -12,7 +12,7 @@ Type and execute:
 ```bash
 yarn install
 ```
-
+s
 then, to run the development server:
 
 ```bash
@@ -27,10 +27,11 @@ and open [http://localhost:3000](http://localhost:3000) with your browser to see
 
 ### Application Setup
 
-To setup this sample you have to create a project and an application in your organization first.
+To setup this sample you have to create a project and an application in your organization (eg, `B2B-Demo`) first.
 
-Open [Console](https://console.zitadel.ch/projects) and create a new project. Let's call it `B2B-Demo`.
-Then on the project detail page click on new application and enter a name for this app. Let's call this one `Portal`. Select `Web`, continue, `PKCE`, then enter `http://localhost:3000/api/auth/callback/zitadel` for the redirect, post redirect can be kept empty. Then press on `create`.
+Open [Console](https://console.zitadel.ch/projects) and create a new project. Let's call it `Project`.
+
+Then on the project detail page click on new application and enter a name for this app. Let's call this one `portal-web`. Select `Web`, continue, `PKCE`, then enter `http://localhost:3000/api/auth/callback/zitadel` for the redirect, post redirect can be kept empty. Then press on `create`.
 
 Copy the clientId as you will need this in your apps environment configuration file later.
 
