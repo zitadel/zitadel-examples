@@ -12,7 +12,6 @@ Type and execute:
 ```bash
 yarn install
 ```
-s
 then, to run the development server:
 
 ```bash
