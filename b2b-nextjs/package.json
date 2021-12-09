@@ -16,7 +16,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.25.0",
     "jsonwebtoken": "^8.5.1",
-    "next": "^12.0.2",
+    "next": "^12.0.5",
     "next-auth": "4.0.0-next.19",
     "postcss": "^8.3.9",
     "react": "17.0.2",
