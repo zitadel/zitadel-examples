@@ -16,7 +16,7 @@ const authConfig: AuthConfig = {
     scope: 'openid profile email',
     responseType: 'code',
     oidc: true,
-    clientId: '144184405349493541@integrations',
+    clientId: '<YOUR APPS CLIENT ID HERE>',
     issuer: 'https://issuer.zitadel.ch',
     redirectUri: 'http://localhost:4200/auth/callback',
     postLogoutRedirectUri: 'http://localhost:4200/signedout',
