@@ -16,19 +16,17 @@ const routes: Routes = [
         component: UserComponent,
         canActivate: [AuthGuard],
     },
-    {
+    { 
         path: 'auth/callback',
-        canActivate: [AuthGuard],
-        redirectTo: 'user',
+        redirectTo: 'user'
     },
     {
         path: 'signedout',
         component: SignedOutComponent
     },
-    {
+    { 
         path: '**',
-        canActivate: [AuthGuard],
-        redirectTo: '/',
+        redirectTo: '/'
     },
 ];
 

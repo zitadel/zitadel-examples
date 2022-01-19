@@ -16,8 +16,8 @@ const authConfig: AuthConfig = {
     scope: 'openid profile email',
     responseType: 'code',
     oidc: true,
-    clientId: '98809213261836203@angular-test', // replace with your appid
-    issuer: 'https://issuer.zitadel.dev', // you may use https://issuer.zitadel.ch
+    clientId: '<YOUR APPS CLIENT ID HERE>',
+    issuer: 'https://issuer.zitadel.ch',
     redirectUri: 'http://localhost:4200/auth/callback',
     postLogoutRedirectUri: 'http://localhost:4200/signedout',
     requireHttps: false // required for running locally
