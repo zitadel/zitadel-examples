@@ -15,7 +15,7 @@ export default function Home() {
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    Welcome to <a href="https://github.com/caos/zitadel-nextjs-template">Next.js with ZITADEL!</a>
+                    Welcome to <a href="https://github.com/zitadel/zitadel-examples/tree/main/nextjs">Next.js with ZITADEL!</a>
                 </h1>
 
                 <p className={styles.description}>

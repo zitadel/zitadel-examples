@@ -38,7 +38,7 @@ const Footer = () => {
               </FooterLink>
 
               <FooterLink
-                href="https://github.com/caos/zitadel-examples"
+                href="https://github.com/zitadel/zitadel-examples"
                 external
               >
                 Example Repo
