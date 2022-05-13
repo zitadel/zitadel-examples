@@ -24,6 +24,13 @@ This repo provides examples of how you can integrate different languages and fra
 - Exchange JWT token signed with private key for authentication token
 - Access ZITADEL's Management API
 
+## [Java with Spring Boot](./java/spring-boot)
+
+- Authentication Code Flow with PKCE
+- Fetch data from userinfo endpoint
+- Extract role information provided by Zitadel
+- Web App as confidential client which calls API resource server
+
 ## License
 
 See the exact licensing terms [here](./LICENSE)
