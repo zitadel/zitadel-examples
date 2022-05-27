@@ -14,8 +14,7 @@ export default function Header() {
             </span>
           </h1>
           <p className="text-lg opacity-80 dark:opacity-80 mb-8">
-            CAOS ltd. is a Swiss open source software company, managing,
-            developing and operating the Identity Experience Platform ZITADEL.
+            ZITADEL - The best of Auth0 and Keycloak combined. Built for the serverless era.
           </p>
         </div>
       </div>
