@@ -124,7 +124,7 @@ Grant your user the role `reader` to the granted project `Portal`. Login again. 
 ### 4. Grant and authorize another project
 
 In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.  
-This is one way how you can implement client discovery. A service user [requests all project-grants](https://github.com/zitadel/zitadel-examples/blob/5e8dcdbd483597ae7e57d5eb2c711b19e7ca4fc9/b2b-nextjs/pages/api/grantedprojects.tsx#L6) for a user from the Management API.
+This is one way how you can implement client discovery. A service user [requests all project-grants](https://github.com/zitadel/zitadel-examples/blob/5e8dcdbd483597ae7e57d5eb2c711b19e7ca4fc9/b2b-nextjs/pages/api/grantedprojects.tsx#L6) for an organization from the Management API.
 
 ### 5. User Management
 
