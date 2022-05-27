@@ -115,6 +115,8 @@ Login with your user. You should have no granted projects and no roles in this o
 
 In the `B2B-Demo` delegate access management of the project `Portal` to `B2B-Demo-Customer` as described above. You don't see any other granted projects because the user is not authorized, yet. Log out.
 
+The logout at this step is required as we use only the token's information and don't call the api. This might not be suitable in a production scenario.
+
 ### 3. Authorize a user for the granted project
 
 Grant your user the role `reader` to the granted project `Portal`. Login again. You should see `Portal` in the tab "Granted Projects". You are not allowed to select the tab "Authorization", this is only for admins. You don't need to logout for the next step.
@@ -122,7 +124,7 @@ Grant your user the role `reader` to the granted project `Portal`. Login again. 
 ### 4. Grant and authorize another project
 
 In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.  
-This is how you can use a Service User for Client-Discovery.
+This is one way how you can implement client discovery. A service user [requests all project-grants](https://github.com/zitadel/zitadel-examples/blob/5e8dcdbd483597ae7e57d5eb2c711b19e7ca4fc9/b2b-nextjs/pages/api/grantedprojects.tsx#L6) for a user from the Management API.
 
 ### 5. User Management
 
