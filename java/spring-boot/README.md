@@ -83,7 +83,7 @@ Open your browser and navigate to http://localhost:18080/webapp/
 
 # Demo
 
-![Demo](spring-boot-zitadel-config-web-app2.png)
+![Demo](spring-boot-zitadel-demo.gif)
 
 # Misc
 
