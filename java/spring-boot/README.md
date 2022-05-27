@@ -1,8 +1,8 @@
-Zitadel Example Project with Spring Boot and Spring Security
+ZITADEL Example Project with Spring Boot and Spring Security
 ----
 
-This example contains two Spring Boot Apps (`app` and `api`) which use the [Zitadel](https://zitadel.ch/) IdP as OpenID Provider.
-The app `web` uses the internal OAuth2 access token (opaque token) provided by Zitadel to access the `api` which acts as a OAuth2 resource server.
+This example contains two Spring Boot Apps (`app` and `api`) which use the [ZITADEL](https://zitadel.ch/) IdP as OpenID Provider.
+The app `web` uses the internal OAuth2 access token (opaque token) provided by ZITADEL to access the `api` which acts as a OAuth2 resource server.
 
 # Features
 - OpenID Connect based Login
@@ -14,7 +14,7 @@ The app `web` uses the internal OAuth2 access token (opaque token) provided by Z
 
 ## Web
 
-The Spring Boot app `web` is configured as confidential Web App and OpenID Connect client in Zitadel and uses the Spring Security OAuth2 client library
+The Spring Boot app `web` is configured as confidential Web App and OpenID Connect client in ZITADEL and uses the Spring Security OAuth2 client library
 for authentication.
 
 Base URL: `http://localhost:18080/webapp`
@@ -23,7 +23,7 @@ Post Logout URL: `http://localhost:18080/webapp`
 
 ## API
 
-The Spring Boot app `api` is configured as an API in Zitadel and uses the Spring Security Resource Server support.
+The Spring Boot app `api` is configured as an API in ZITADEL and uses the Spring Security Resource Server support.
 
 Base URL: http://localhost:18090
 
@@ -53,7 +53,7 @@ java \
 
 # Configuration
 
-## Zitadel
+## ZITADEL
 
 ![Client Configurations](spring-boot-zitadel-config.png)
 
