@@ -100,9 +100,12 @@ Users with `admin` role can view granted projects and list users of the selected
 
 ![app screen](./public/screenshot.png)
 
-## Step by step guide (What next?)
+## Step by step walk through
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-BVgq3mmxGE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[![Video walk-through on Youtube](https://i9.ytimg.com/vi/-BVgq3mmxGE/mq3.jpg?sqp=CLihwpQG&rs=AOn4CLCo4vALkRfKSfg8E3wVHBAo30wIbQ)](https://www.youtube.com/embed/-BVgq3mmxGE)
+
+Watch the [Youtube Video](https://www.youtube.com/embed/-BVgq3mmxGE) for a walk-through.
 
 ### 1. Validate Setup
 
