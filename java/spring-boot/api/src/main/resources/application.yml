@@ -20,8 +20,8 @@ spring:
           jwk-set-uri: https://api.zitadel.ch/oauth/v2/keys
         opaquetoken:
           introspection-uri: https://api.zitadel.ch/oauth/v2/introspect
-          client-id: ...api-client-id
-          client-secret: ...api-client-secret
+          client-id: '<the-api-client-id>'
+          client-secret: '<the-api-client-secret>'
 
 logging:
   level:
