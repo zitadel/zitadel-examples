@@ -99,3 +99,29 @@ Users with `view` role can view granted projects on their organization which wer
 Users with `admin` role can view granted projects and list users of the selected organization who are granted to use the portal application too.
 
 ![app screen](./public/screenshot.png)
+
+## Step by step guide (What next?)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-BVgq3mmxGE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### 1. Validate Setup
+
+Login with your user. You should have no granted projects and no roles in this organization. Log out.
+
+### 2. Grant a project
+
+In the `B2B-Demo` delegate access management of the project `Portal` to `B2B-Demo-Customer` as described above. You don't see any other granted projects because the user is not authorized, yet. Log out.
+
+### 3. Authorize a user for the granted project
+
+Grant your user the role `reader` to the granted project `Portal`. Login again. You should see `Portal` in the tab "Granted Projects". You are not allowed to select the tab "Authorization", this is only for admins. You don't need to logout for the next step.
+
+### 4. Grant and authorize another project
+
+In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.  
+This is how you can use a Service User for Client-Discovery.
+
+### 5. User Management
+
+Give your user the `admin` role in addition to the `reader` role. Make sure you log off and log back in, to get the roles in the auth token. You should now be able to click on the tab "Authorization" and you see all users with authorization to the project `Portal`.  
+This is how you can build your user management logic on top of the ZITADEL API.
