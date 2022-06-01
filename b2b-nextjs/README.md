@@ -1,6 +1,6 @@
 This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business) context, where a company is providing a customer portal to their customers:
 
-- A user of the customer should see all granted projects in the portal
+- A user of the customer should see all granted projects in the portal ("Service discovery")
 - A admin user of the customers sees a list of customer's users (could be expanded to make roles editable)
 
 ## Getting Started
@@ -40,7 +40,7 @@ On the application detail page open the collapsed section under redirect setting
 
 Now clone this project and navigate to its root folder. Create a file `.env.local` and copy paste the following:
 
-```
+```text
 NEXTAUTH_URL=http://localhost:3000
 ORG_ID={YourOrgId}
 PROJECT_ID={YourProjectId}
@@ -93,7 +93,7 @@ You should be able to login with the user created in the organization `B2B-Demo-
 
 Switch to authorizations to view all users and their roles. You may extend the application here to make role-assignment possible within the portal.
 
-## What does it do?:
+## What does it do?
 
 Users with `view` role can view granted projects on their organization which were granted by your organization (owning this portal application).
 Users with `admin` role can view granted projects and list users of the selected organization who are granted to use the portal application too.
@@ -101,7 +101,6 @@ Users with `admin` role can view granted projects and list users of the selected
 ![app screen](./public/screenshot.png)
 
 ## Step by step walk through
-
 
 [![Video walk-through on Youtube](https://i9.ytimg.com/vi/-BVgq3mmxGE/mq3.jpg?sqp=CLihwpQG&rs=AOn4CLCo4vALkRfKSfg8E3wVHBAo30wIbQ)](https://www.youtube.com/embed/-BVgq3mmxGE)
 
@@ -124,7 +123,6 @@ Grant your user the role `reader` to the granted project `Portal`. Login again. 
 ### 4. Grant and authorize another project
 
 In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.  
-This is one way how you can implement client discovery. A service user [requests all project-grants](https://github.com/zitadel/zitadel-examples/blob/5e8dcdbd483597ae7e57d5eb2c711b19e7ca4fc9/b2b-nextjs/pages/api/grantedprojects.tsx#L6) for an organization from the Management API.
 
 ### 5. User Management
 
