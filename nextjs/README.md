@@ -36,42 +36,40 @@ To setup your configuration, create a file called [...nextauth].tsx in `pages/ap
 ```ts
 import NextAuth from "next-auth";
 
-export const ZITADEL = {
-  id: "zitadel",
-  name: "zitadel",
-  type: "oauth",
-  version: "2.0",
-  scope: "openid profile email",
-  params: { response_type: "code", grant_type: "authorization_code" },
-  authorizationParams: {
-    grant_type: "authorization_code",
-    response_type: "code",
-  },
-  accessTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
-  requestTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
-  authorizationUrl: "https://accounts.zitadel.dev/oauth/v2/authorize",
-  profileUrl: "https://api.zitadel.dev/oauth/v2/userinfo",
-  protection: "pkce",
-  async profile(profile, tokens) {
-    return {
-      id: profile.sub,
-      name: profile.name,
-      email: profile.email,
-      image: profile.picture,
-    };
-  },
-  clientId: process.env.ZITADEL_CLIENT_ID,
-  session: {
-    jwt: true,
-  },
-};
-
 export default NextAuth({
-  providers: [ZITADEL],
+  providers: [
+    {
+      id: "zitadel",
+      name: "zitadel",
+      type: "oauth",
+      version: "2",
+      wellKnown: process.env.ZITADEL_ISSUER,
+      authorization: {
+        params: {
+          scope: "openid email profile",
+        },
+      },
+      idToken: true,
+      checks: ["pkce", "state"],
+      client: {
+        token_endpoint_auth_method: "none",
+      },
+      async profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          firstName: profile.given_name,
+          lastName: profile.family_name,
+          email: profile.email,
+          loginName: profile.preferred_username,
+          image: profile.picture,
+        };
+      },
+      clientId: process.env.ZITADEL_CLIENT_ID,
+    },
+  ],
 });
 ```
-
-Replace the endpoints `https://api.zitadel.dev/` with `https://api.zitadel.ch/` if your using a ZITADEL CLOUD tier or your own endpoint if your using a self hosted ENTERPRISE tier respectively.
 
 We recommend using the Authentication Code flow secured by PKCE for the Authentication flow.
 To be able to connect to ZITADEL, navigate to your [Console Projects](https://console.zitadel.ch/projects) create or select an existing project and add your app selecting WEB, then PKCE, and then add `http://localhost:3000/api/auth/callback/zitadel` as redirect url to your app.
@@ -82,12 +80,16 @@ Hit Create, then in the detail view of your application make sure to enable dev 
 
 > Note that we get a clientId but no clientSecret because it is not needed for our authentication flow.
 
+Now go to Token settings and check the checkbox for **User Info inside ID Token** to get your users name directly on authentication.
+
 ## Environment
 
 Create a file `.env` in the root of the project and add the following keys to it.
+You can find your Issuer Url on the application detail page in console.
 
 ```
 NEXTAUTH_URL=http://localhost:3000
+ZITADEL_ISSUER=[yourIssuerUrl]
 ZITADEL_CLIENT_ID=[yourClientId]
 ```
 
