@@ -4,7 +4,6 @@ import { BearerToken, hasRole, requestAccessToken } from '../../lib/jwt';
 import { handleFetchErrors } from '../../lib/middleware';
 
 function getGrantedProjectsOfUser(
-  userId: string,
   orgId: string,
   authorizationHeader: string
 ): Promise<any> {
@@ -49,14 +48,11 @@ function getGrantedProjectsOfUser(
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  //   await runMiddleware(req, res, cors);
-
   if (req.method === "GET") {
-    const userId = req.headers.userid as string;
     const orgId = req.headers.orgid as string;
     const authorizationHeader = req.headers.authorization as string;
 
-    return getGrantedProjectsOfUser(userId, orgId, authorizationHeader)
+    return getGrantedProjectsOfUser(orgId, authorizationHeader)
       .then((resp) => {
         res.status(200).json(resp);
       })

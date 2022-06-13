@@ -1,6 +1,6 @@
 This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business) context, where a company is providing a customer portal to their customers:
 
-- A user of the customer should see all granted projects in the portal
+- A user of the customer should see all granted projects in the portal ("Service discovery")
 - A admin user of the customers sees a list of customer's users (could be expanded to make roles editable)
 
 ## Getting Started
@@ -40,7 +40,7 @@ On the application detail page open the collapsed section under redirect setting
 
 Now clone this project and navigate to its root folder. Create a file `.env.local` and copy paste the following:
 
-```
+```text
 NEXTAUTH_URL=http://localhost:3000
 ORG_ID={YourOrgId}
 PROJECT_ID={YourProjectId}
@@ -93,9 +93,38 @@ You should be able to login with the user created in the organization `B2B-Demo-
 
 Switch to authorizations to view all users and their roles. You may extend the application here to make role-assignment possible within the portal.
 
-## What does it do?:
+## What does it do?
 
 Users with `view` role can view granted projects on their organization which were granted by your organization (owning this portal application).
 Users with `admin` role can view granted projects and list users of the selected organization who are granted to use the portal application too.
 
 ![app screen](./public/screenshot.png)
+
+## Step by step walk through
+
+[![Video walk-through on Youtube](https://i9.ytimg.com/vi/-BVgq3mmxGE/mq3.jpg?sqp=CLihwpQG&rs=AOn4CLCo4vALkRfKSfg8E3wVHBAo30wIbQ)](https://www.youtube.com/embed/-BVgq3mmxGE)
+
+Watch the [Youtube Video](https://www.youtube.com/embed/-BVgq3mmxGE) for a walk-through.
+
+### 1. Validate Setup
+
+Login with your user. You should have no granted projects and no roles in this organization. Log out.
+
+### 2. Grant a project
+
+In the `B2B-Demo` delegate access management of the project `Portal` to `B2B-Demo-Customer` as described above. You don't see any other granted projects because the user is not authorized, yet. Log out.
+
+The logout at this step is required as we use only the token's information and don't call the api. This might not be suitable in a production scenario.
+
+### 3. Authorize a user for the granted project
+
+Grant your user the role `reader` to the granted project `Portal`. Login again. You should see `Portal` in the tab "Granted Projects". You are not allowed to select the tab "Authorization", this is only for admins. You don't need to logout for the next step.
+
+### 4. Grant and authorize another project
+
+In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.  
+
+### 5. User Management
+
+Give your user the `admin` role in addition to the `reader` role. Make sure you log off and log back in, to get the roles in the auth token. You should now be able to click on the tab "Authorization" and you see all users with authorization to the project `Portal`.  
+This is how you can build your user management logic on top of the ZITADEL API.

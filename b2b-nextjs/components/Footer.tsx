@@ -17,10 +17,10 @@ const Footer = () => {
                 ZITADEL
               </p>
 
-              <FooterLink external href="https://zitadel.ch">
+              <FooterLink external href="https://zitadel.com">
                 Home
               </FooterLink>
-              <FooterLink external href="https://zitadel.ch/opensource">
+              <FooterLink external href="https://zitadel.com/opensource">
                 Opensource
               </FooterLink>
             </div>
@@ -31,7 +31,7 @@ const Footer = () => {
               </p>
 
               <FooterLink
-                href="https://docs.zitadel.ch/docs/quickstarts/introduction"
+                href="https://docs.zitadel.com/docs/quickstarts/introduction"
                 external
               >
                 Quickstarts
@@ -49,8 +49,8 @@ const Footer = () => {
           <div className="flex-1 p-4 md:px-0 flex flex-col items-center md:flex-row md:justify-between border-t border-gray-500 border-opacity-30 text-xs">
             <div className="flex-1">
               <p className="text-gray-600 dark:text-gray-300 text-center md:text-left mb-2">
-                <a className="hover:text-pink-600" href="https://caos.ch">
-                  CAOS AG
+                <a className="hover:text-pink-600" href="https://zitadel.com">
+                  ZITADEL (CAOS AG)
                 </a>
                 , Teufener Str. 19, 9000 St. Gallen
               </p>
@@ -62,7 +62,7 @@ const Footer = () => {
                 className="hover:text-gray-500 dark:text-gray-400 dark:hover:text-white"
                 target="_blank"
                 rel="noreferrer"
-                href="https://github.com/caos"
+                href="https://github.com/zitadel"
               >
                 <i className="text-3xl lab la-github"></i>
               </a>
@@ -70,7 +70,7 @@ const Footer = () => {
                 className="hover:text-gray-500 dark:text-gray-400 dark:hover:text-white"
                 target="_blank"
                 rel="noreferrer"
-                href="https://twitter.com/caos_ch"
+                href="https://twitter.com/zitadel"
               >
                 <i className="text-3xl lab la-twitter"></i>
               </a>
@@ -78,7 +78,7 @@ const Footer = () => {
                 className="hover:text-gray-500 dark:text-gray-400 dark:hover:text-white"
                 target="_blank"
                 rel="noreferrer"
-                href="https://www.linkedin.com/company/caos-ag/"
+                href="https://www.linkedin.com/company/zitadel/"
               >
                 <i className="text-3xl lab la-linkedin"></i>
               </a>
