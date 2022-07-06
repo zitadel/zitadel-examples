@@ -1,3 +1,5 @@
+import create from 'zustand';
+
 export const ROLES: Role[] = [
   {
     name: "Granted Projects",
@@ -16,3 +18,13 @@ export interface Role {
   desc: string;
   roles: string[]; // one of the given roles enables the selection if available on the user
 }
+
+const roleStore = create((set) => ({
+  roles: null,
+  setRoles: (rolesToSet: string[]) =>
+    set(() => ({
+      roles: rolesToSet,
+    })),
+}));
+
+export default roleStore;

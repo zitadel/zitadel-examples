@@ -1,5 +1,4 @@
 import { getSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import orgStore from '../lib/org';

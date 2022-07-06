@@ -1,27 +1,16 @@
-import { RadioGroup } from "@headlessui/react";
-import { EyeIcon } from "@heroicons/react/outline";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { RadioGroup } from '@headlessui/react';
+import { EyeIcon } from '@heroicons/react/outline';
 
-import orgStore from "../lib/org";
-import { Role, ROLES } from "../lib/roles";
+import roleStore, { Role, ROLES } from '../lib/roles';
 
 export default function GrantRadio({ selected, setSelected }: any) {
-  const { data: session } = useSession();
-  const org = orgStore((state) => (state as any).org);
+  const roles = roleStore((state) => (state as any).roles);
 
   function isAllowed(requestedRoles: string[]): boolean {
-    const isAllowed = !!(
-      org &&
-      org.id &&
-      session &&
-      session.user &&
-      session.user.roles &&
+    const isAllowed =
+      roles &&
       requestedRoles &&
-      requestedRoles.findIndex((role) => {
-        return session.user.roles[role] && session.user.roles[role][org.id];
-      }) > -1
-    );
+      roles.some((role) => requestedRoles.includes(role));
 
     return isAllowed;
   }

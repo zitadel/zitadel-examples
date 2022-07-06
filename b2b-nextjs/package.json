@@ -21,7 +21,6 @@
     "postcss": "^8.3.9",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-tooltip": "^4.2.21",
     "sass": "^1.43.2",
     "swr": "^1.0.1",
     "tailwindcss": "^2.2.17",
