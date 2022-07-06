@@ -19,12 +19,12 @@ export interface Role {
   roles: string[]; // one of the given roles enables the selection if available on the user
 }
 
-const roleStore = create((set) => ({
+const roleStore = create((set: any) => ({
   roles: null,
   setRoles: (rolesToSet: string[]) =>
-    set(() => ({
+    set({
       roles: rolesToSet,
-    })),
+    }),
 }));
 
 export default roleStore;
