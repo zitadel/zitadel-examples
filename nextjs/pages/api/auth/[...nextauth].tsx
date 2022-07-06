@@ -6,28 +6,30 @@ export default NextAuth({
       id: "zitadel",
       name: "zitadel",
       type: "oauth",
-      version: "2.0",
-      scope: "openid profile email",
-      params: { grant_type: "authorization_code" },
-      authorizationParams: {
-        grant_type: "authorization_code",
-        response_type: "code",
+      version: "2",
+      wellKnown: process.env.ZITADEL_ISSUER,
+      authorization: {
+        params: {
+          scope: "openid email profile",
+        },
       },
-      accessTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
-      requestTokenUrl: "https://api.zitadel.dev/oauth/v2/token",
-      authorizationUrl: "https://accounts.zitadel.dev/oauth/v2/authorize",
-      profileUrl: "https://api.zitadel.dev/oauth/v2/userinfo",
-      protection: "pkce",
-      async profile(profile: any, tokens) {
+      idToken: true,
+      checks: ["pkce", "state"],
+      client: {
+        token_endpoint_auth_method: "none",
+      },
+      async profile(profile) {
         return {
           id: profile.sub,
           name: profile.name,
+          firstName: profile.given_name,
+          lastName: profile.family_name,
           email: profile.email,
+          loginName: profile.preferred_username,
           image: profile.picture,
         };
       },
       clientId: process.env.ZITADEL_CLIENT_ID,
-      clientSecret: "",
     },
   ],
 });
