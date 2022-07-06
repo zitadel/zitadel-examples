@@ -1,10 +1,6 @@
 import NextAuth from 'next-auth';
 
 export default NextAuth({
-  //   session: {
-  //     jwt: true,
-  //     maxAge: 0.5 * 24 * 60 * 60,
-  //   },
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
       if (profile?.sub) {
