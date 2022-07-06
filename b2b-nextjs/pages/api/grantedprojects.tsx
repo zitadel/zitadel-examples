@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { BearerToken, hasRole, requestAccessToken } from '../../lib/jwt';
+import { hasRole } from '../../lib/jwt';
 import { handleFetchErrors } from '../../lib/middleware';
 
 function getGrantedProjectsOfUser(
@@ -10,34 +10,34 @@ function getGrantedProjectsOfUser(
   return hasRole("reader", orgId, authorizationHeader)
     .then((isAllowed) => {
       if (isAllowed) {
-        return requestAccessToken().then((token: BearerToken) => {
-          const request = `https://api.zitadel.ch/management/v1/projectgrants/_search`;
-          return fetch(request, {
-            headers: {
-              authorization: `Bearer ${token.access_token}`,
-              "x-zitadel-org": process.env.ORG_ID,
-              "content-type": "application/json",
+        const token = process.env.SERVICE_ACCOUNT_ACCESS_TOKEN;
+
+        const request = `${process.env.API}/management/v1/projectgrants/_search`;
+        return fetch(request, {
+          headers: {
+            authorization: `Bearer ${token}`,
+            "x-zitadel-org": process.env.ORG_ID,
+            "content-type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            query: {
+              limit: 100,
+              asc: true,
             },
-            method: "POST",
-            body: JSON.stringify({
-              query: {
-                limit: 100,
-                asc: true,
-              },
-              queries: [
-                {
-                  grantedOrgIdQuery: {
-                    grantedOrgId: orgId,
-                  },
+            queries: [
+              {
+                grantedOrgIdQuery: {
+                  grantedOrgId: orgId,
                 },
-              ],
-            }),
-          })
-            .then(handleFetchErrors)
-            .then((resp) => {
-              return resp.json();
-            });
-        });
+              },
+            ],
+          }),
+        })
+          .then(handleFetchErrors)
+          .then((resp) => {
+            return resp.json();
+          });
       } else {
         throw new Error("not allowed");
       }

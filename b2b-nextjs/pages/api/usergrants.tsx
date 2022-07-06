@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 
-import { BearerToken, hasRole, requestAccessToken } from "../../lib/jwt";
-import { handleFetchErrors } from "../../lib/middleware";
+import { hasRole } from '../../lib/jwt';
+import { handleFetchErrors } from '../../lib/middleware';
 
 function getUserGrants(
   orgId: string,
@@ -10,49 +10,48 @@ function getUserGrants(
   return hasRole("admin", orgId, authorizationHeader)
     .then((isAllowed) => {
       if (isAllowed) {
-        return requestAccessToken().then((token: BearerToken) => {
-          const request = `https://api.zitadel.ch/management/v1/users/grants/_search`;
-          return fetch(request, {
-            headers: {
-              authorization: `Bearer ${token.access_token}`,
-              "x-zitadel-org": process.env.ORG_ID,
-              "content-type": "application/json",
+        const token = process.env.SERVICE_ACCOUNT_ACCESS_TOKEN;
+        const request = `${process.env.API}/management/v1/users/grants/_search`;
+        return fetch(request, {
+          headers: {
+            authorization: `Bearer ${token}`,
+            "x-zitadel-org": process.env.ORG_ID,
+            "content-type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            query: {
+              limit: 100,
+              asc: true,
             },
-            method: "POST",
-            body: JSON.stringify({
-              query: {
-                limit: 100,
-                asc: true,
+            queries: [
+              {
+                projectIdQuery: {
+                  projectId: process.env.PROJECT_ID,
+                },
               },
-              queries: [
-                {
-                  projectIdQuery: {
-                    projectId: process.env.PROJECT_ID,
-                  },
+              {
+                withGrantedQuery: {
+                  withGranted: true,
                 },
-                {
-                  withGrantedQuery: {
-                    withGranted: true,
-                  },
-                },
-              ],
-            }),
+              },
+            ],
+          }),
+        })
+          .then(handleFetchErrors)
+          .then((resp) => {
+            return resp.json();
           })
-            .then(handleFetchErrors)
-            .then((resp) => {
-              return resp.json();
-            })
-            .then((resp) => {
-              const grants = resp.result
-                ? resp.result.filter((grant) => grant.orgId === orgId)
-                : [];
-              const newResp = {
-                ...resp,
-                result: grants,
-              };
-              return newResp;
-            });
-        });
+          .then((resp) => {
+            const grants = resp.result
+              ? resp.result.filter((grant) => grant.orgId === orgId)
+              : [];
+            const newResp = {
+              ...resp,
+              result: grants,
+            };
+            return newResp;
+          });
       } else {
         throw new Error("not allowed");
       }
