@@ -51,9 +51,9 @@ ZITADEL_CLIENT_ID={YourClientID}
 SERVICE_ACCOUNT_SECRET={YourServiceAccountSecret}
 ```
 
-`ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console and navigating on "Organisation" on navigation. `{YourOrgId}` is displayed on top as "Resource Id".
+`ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console. `{YourOrgId}` is displayed on top of the organization detail page as "Resource Id".
 
-`PROJECT_ID`: You can find `{YourProjectId}` by clicking on "Projects" on the navigation and select the Project `Portal`. `{YourProjectId}` is displayed on the top as "Resource Id".
+`PROJECT_ID`: You can find `{YourProjectId}` by clicking on "Projects" in the navigation and select the Project `Portal`. `{YourProjectId}` is displayed on the top as "Resource Id".
 
 `ZITADEL_CLIENT_ID`: Having the project `Portal` selected, click on the Application `Web`. `{YourClientID}` is displayed in the top-center, labeled as "Client Id".
 
@@ -70,7 +70,7 @@ Copy the content of this file right after `SERVICE_ACCOUNT_ACCESS_TOKEN=` in you
 
 Back in Console, navigate to the Portal project and add the Service User as Manager on the top.
 Make sure to select `PROJECT_OWNER_VIEWER` as the management role.
-To show granted projects, go to the Portal Organization and add the Service User as `Org Project Permission Editor` Manager.
+To show granted projects, go to the B2B-Demo organization and add the Service User as `Org Project Permission Editor` Manager.
 
 ### Roles
 
