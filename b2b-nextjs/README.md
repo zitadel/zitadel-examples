@@ -12,6 +12,7 @@ Type and execute:
 ```bash
 yarn install
 ```
+
 then, to run the development server:
 
 ```bash
@@ -48,25 +49,25 @@ ZITADEL_CLIENT_ID={YourClientID}
 SERVICE_ACCOUNT_SECRET={YourServiceAccountSecret}
 ```
 
-`ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console and click on "Organisation" on the left sidepanel. `{YourOrgId}` is displayed in right sidepanel labeled as "Resource Id".
+`ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console and navigating on "Organisation" on navigation. `{YourOrgId}` is displayed on top as "Resource Id".
 
-`PROJECT_ID`: You can find `{YourProjectId}` by clicking on "Projects" on the sidepanel and select the Project `Portal`. `{YourProjectId}` is displayed in the right sidepanel labeled as "Resource Id".
+`PROJECT_ID`: You can find `{YourProjectId}` by clicking on "Projects" on the navigation and select the Project `Portal`. `{YourProjectId}` is displayed on the top as "Resource Id".
 
 `ZITADEL_CLIENT_ID`: Having the project `Portal` selected, click on the Application `Web`. `{YourClientID}` is displayed in the top-center, labeled as "Client Id".
 
-`SERVICE_ACCOUNT_SECRET`: Setup a service user and copy the account secret here (see below)
+`SERVICE_ACCOUNT_ACCESS_TOKEN`: Setup a service user, add a Personal Access Token and copy the secret here (see below)
 
 ### Service User
 
 To make this application work you need a service user which loads granted-projects and user-grants for you.
-In the B2B-Demo organization, navigate to `Service-Users` in the side navigation panel of Console and create a new service-user.
+In the B2B-Demo organization, navigate to `Users` in navigation of Console, click on `Service Users` and create a new user.
 Let's set its username to `nextjs` and its name to `NextJS`. Then press `create`.
 
-On the detail page, add a new key, set an optional expiration date and download the generated JSON file.
-Copy the content of this file right after `SERVICE_ACCOUNT_SECRET=` in your configuration file.
+On the detail page, navigate to Personal Access Tokens and add a new entry, set an optional expiration date and copy the generated Token.
+Copy the content of this file right after `SERVICE_ACCOUNT_ACCESS_TOKEN=` in your configuration file.
 
-Back in Console, click onto the plus sign in the right sidepanel to grant access to your service user.
-Select `owned project`, search for `B2B-Demo` and select `PROJECT_OWNER_VIEWER` as the management role.
+Back in Console, navigate to the Portal project and add the Service User as Manager on the top.
+Make sure to select `PROJECT_OWNER_VIEWER` as the management role.
 
 ### Roles
 
@@ -77,13 +78,13 @@ To setup the needed roles for your project, navigate to your Portal project, and
 | admin  | Administrator |       | The administrator, allowed to read granted projects and to user grants |
 | reader | Reader        |       | A user who is allowed to read his organizations granted projects only  |
 
-Now make sure to enable `Assert Roles on Authentication` above the role table. This makes sure that roles, which is used by the application to enable UI components, are set in your OIDC ID Token.
+Now in the `General` Sectiom of the Portal project, make sure to enable `Assert Roles on Authentication`. This makes sure that roles, which is used by the application to enable UI components, are set in your OIDC ID Token.
 
 ### Delegate the project to another organization
 
-Create a new organization in Console. Easiest way is to use the organization dropdown on the top left. Let's call this new organization `B2B-Demo-Customer`. 
+Create a new organization in Console. Easiest way is to use the organization dropdown on the top left. Let's call this new organization `B2B-Demo-Customer`.
 
-Switch to the `B2B-Demo` organization, select Projects in the left sidepanel, and click on `Portal`. [Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `b2b-demo-customer.zitadel.ch`.
+Switch to the `B2B-Demo` organization, select Projects in the navigation, and click on `Portal` and then `Grants`. [Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `b2b-demo-customer.zitadel.ch`.
 
 Now switch back to the organization `B2B-Demo-Customer`, [create a new user](https://docs.zitadel.ch/docs/manuals/user-register) in this organization. Select Granted Projects on the left side panel and click on `Portal`. Add an authorization to the newly created user.
 
@@ -122,7 +123,7 @@ Grant your user the role `reader` to the granted project `Portal`. Login again. 
 
 ### 4. Grant and authorize another project
 
-In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.  
+In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.
 
 ### 5. User Management
 

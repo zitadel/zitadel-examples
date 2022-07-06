@@ -57,7 +57,7 @@ export default function ProfileImage({ user }: { user?: any | null }) {
             />
           ) : (
             <span className="text-sm">
-              {user ? user.name.substring(0, 1) : "A"}
+              {user && user.name ? user.name.substring(0, 1) : "A"}
             </span>
           )}
         </Menu.Button>
