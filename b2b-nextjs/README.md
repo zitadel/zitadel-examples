@@ -35,7 +35,9 @@ Then on the project detail page click on new application and enter a name for th
 
 Copy the clientId as you will need this in your apps environment configuration file later.
 
-On the application detail page open the collapsed section under redirect settings and enable `Development Mode`. This will allow you application to work on `localhost:3000`. Make sure to save your change.
+On the application detail page click on the section under redirect settings and enable `Development Mode`. This will allow you application to work on `localhost:3000`.
+To read the user data and roles from ID Token, go to the section Token Settings and make sure both checkboxes, `User roles inside ID Token` and `User Info inside ID Token` are enabled.
+Make sure to save your changes.
 
 ### Secret
 
@@ -68,6 +70,7 @@ Copy the content of this file right after `SERVICE_ACCOUNT_ACCESS_TOKEN=` in you
 
 Back in Console, navigate to the Portal project and add the Service User as Manager on the top.
 Make sure to select `PROJECT_OWNER_VIEWER` as the management role.
+To show granted projects, go to the Portal Organization and add the Service User as `Org Project Permission Editor` Manager.
 
 ### Roles
 

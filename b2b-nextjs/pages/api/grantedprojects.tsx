@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { hasRole } from '../../lib/jwt';
+import { hasRole } from '../../lib/hasRole';
 import { handleFetchErrors } from '../../lib/middleware';
 
 function getGrantedProjectsOfUser(
@@ -11,7 +11,6 @@ function getGrantedProjectsOfUser(
     .then((isAllowed) => {
       if (isAllowed) {
         const token = process.env.SERVICE_ACCOUNT_ACCESS_TOKEN;
-
         const request = `${process.env.API}/management/v1/projectgrants/_search`;
         return fetch(request, {
           headers: {

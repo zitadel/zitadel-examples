@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { hasRole } from '../../lib/jwt';
+import { hasRole } from '../../lib/hasRole';
 import { handleFetchErrors } from '../../lib/middleware';
 
 function getUserGrants(

@@ -7,7 +7,6 @@ export default NextAuth({
   //   },
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
-      //   console.log("jwt", account.access_token, token, user, account, profile);
       if (profile?.sub) {
         token.sub = profile.sub;
       }
@@ -17,11 +16,9 @@ export default NextAuth({
       if (typeof user !== typeof undefined) {
         token.user = user;
       }
-      //   console.log(token);
       return token;
     },
     session: async function session({ session, token }) {
-      console.log("session", token);
       session.accessToken = token.accessToken;
       session.id = token.id;
       session.sub = token.sub;
@@ -56,6 +53,7 @@ export default NextAuth({
           email: profile.email,
           loginName: profile.preferred_username,
           image: profile.picture,
+          roles: profile["urn:zitadel:iam:org:project:roles"],
         };
       },
       clientId: process.env.ZITADEL_CLIENT_ID,
