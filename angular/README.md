@@ -6,6 +6,16 @@ This is our Zitadel Angular Template. If shows how to authenticate as a user and
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
 
+## Run with zitadel.cloud
+
+To run the example you need to create your ZITADEL instance. If you not already have go to zitadel.cloud register yourself and create your first instance.
+
+1. Create ZITADEL instance on zitadel.cloud
+2. Login to your ZITADEL instance and create an app according to: https://docs.zitadel.com/docs/quickstarts/login/angular
+3. Go to app.module.ts
+    1. Replace <YOUR DOMAIN> (4 times) with the domain of your own ZITADEL instance
+    2. Replace <YOUR APPS CLIENT ID HERE> (once) with the client id created in the app in step 2 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

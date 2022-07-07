@@ -17,7 +17,7 @@ const authConfig: AuthConfig = {
     responseType: 'code',
     oidc: true,
     clientId: '<YOUR APPS CLIENT ID HERE>',
-    issuer: 'https://issuer.zitadel.ch',
+    issuer: '<YOUR DOMAIN>', // eg. https://acme-jdo9fs.zitadel.cloud
     redirectUri: 'http://localhost:4200/auth/callback',
     postLogoutRedirectUri: 'http://localhost:4200/signedout',
     requireHttps: false // required for running locally
@@ -42,7 +42,11 @@ const stateHandlerFn = (stateHandler: StatehandlerService) => {
         HttpClientModule,
         OAuthModule.forRoot({
             resourceServer: {
-                allowedUrls: ['https://test.api.zitadel.caos.ch/caos.zitadel.auth.api.v1.AuthService', 'https://test.api.zitadel.caos.ch/oauth/v2/userinfo', 'https://test.api.zitadel.caos.ch/caos.zitadel.management.api.v1.ManagementService/', 'https://preview.api.zitadel.caos.ch'],
+                allowedUrls: [
+                    '<YOUR DOMAIN>/caos.zitadel.auth.api.v1.AuthService', 
+                    '<YOUR DOMAIN>/oauth/v2/userinfo', 
+                    '<YOUR DOMAIN>/caos.zitadel.management.api.v1.ManagementService/', 
+                    'https://preview.api.zitadel.caos.ch'],
                 sendAccessToken: true,
             },
         }),
