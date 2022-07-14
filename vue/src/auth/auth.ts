@@ -5,7 +5,7 @@ const VUE_APP_ZITADEL_CLIENT_ID = "169824185969869057@vue";
 // note the ending '/'
 const appUrl = "http://localhost:3000/";
 
-const idsrvAuth = createOidcAuth(
+const mainOidc = createOidcAuth(
   "main",
   SignInType.Window,
   appUrl,
@@ -14,55 +14,47 @@ const idsrvAuth = createOidcAuth(
     client_id: VUE_APP_ZITADEL_CLIENT_ID,
     response_type: "code",
     scope: "openid profile email",
-    prompt: "login",
-    // stateStore: new WebStorageStateStore({ store: window.localStorage })
+    // prompt: "login",
   },
   console,
   LogLevel.Debug
 );
 
-// SignInType could be Window or Popup
-export const mainOidc = createOidcAuth("main", SignInType.Window, appUrl, {
-  authority: "https://demo.identityserver.io/",
-  client_id: "implicit",
-  response_type: "id_token token",
-  scope: "openid profile email api",
-});
-
 // handle events
-idsrvAuth.events.addAccessTokenExpiring(function () {
+mainOidc.events.addAccessTokenExpiring(function () {
   // eslint-disable-next-line no-console
   console.log("access token expiring");
 });
 
-idsrvAuth.events.addAccessTokenExpired(function () {
+mainOidc.events.addAccessTokenExpired(function () {
   // eslint-disable-next-line no-console
   console.log("access token expired");
 });
 
-idsrvAuth.events.addSilentRenewError(function (err: Error) {
+mainOidc.events.addSilentRenewError(function (err: Error) {
   // eslint-disable-next-line no-console
   console.error("silent renew error", err);
 });
 
-idsrvAuth.events.addUserLoaded(function (user: User) {
+mainOidc.events.addUserLoaded((user: any) => {
   // eslint-disable-next-line no-console
+  //   router.push("/about");
   console.log("user loaded", user);
 });
 
-idsrvAuth.events.addUserUnloaded(function () {
+mainOidc.events.addUserUnloaded(function () {
   // eslint-disable-next-line no-console
   console.log("user unloaded");
 });
 
-idsrvAuth.events.addUserSignedOut(function () {
+mainOidc.events.addUserSignedOut(function () {
   // eslint-disable-next-line no-console
   console.log("user signed out");
 });
 
-idsrvAuth.events.addUserSessionChanged(function () {
+mainOidc.events.addUserSessionChanged(function () {
   // eslint-disable-next-line no-console
   console.log("user session changed");
 });
 
-export default idsrvAuth;
+export default mainOidc;

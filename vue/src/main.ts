@@ -4,7 +4,7 @@ import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 
 import App from './App.vue';
-import idsrvAuth, { mainOidc } from './auth/auth';
+import mainOidc from './auth/auth';
 import router from './router';
 
 mainOidc.startup().then((ok) => {
@@ -14,7 +14,7 @@ mainOidc.startup().then((ok) => {
     app.use(createPinia());
     app.use(router);
 
-    app.config.globalProperties.$oidc = idsrvAuth;
+    app.config.globalProperties.$oidc = mainOidc;
 
     app.mount("#app");
   } else {
