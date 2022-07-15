@@ -7,6 +7,32 @@ This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business
 
 ## Getting Started
 
+### Configuration
+
+Now clone this project and navigate to its root folder. Create a file `.env.local` and copy paste the following:
+
+```text
+NEXTAUTH_URL=http://localhost:3000                          # Base url of this app (B2B portal)
+ZITADEL_ISSUER=https://{yourDomain}.zitadel.cloud           # Url of your zitadel instance (assuming you're using zitadel.cloud)
+ORG_ID={YourOrgId}                                          # Organization's ID
+PROJECT_ID={YourProjectId}                                  # Project's ID
+ZITADEL_CLIENT_ID={YourClientID}                            # Client's ID for this app (B2B portal)
+SERVICE_ACCOUNT_ACCESS_TOKEN={YourServiceAccountSecret}     # Personal access token for the Service User
+API=https://{yourDomain}.zitadel.cloud                      # Url of the API (same as ZITADEL_ISSUER)
+```
+
+Please see below on how to setup ZITADEL and obtain the values.
+
+`ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console. `{YourOrgId}` is displayed on top of the organization detail page as "Resource Id".
+
+`PROJECT_ID`: You can find `{YourProjectId}` by clicking on "Projects" in the navigation and select the Project `Portal`. `{YourProjectId}` is displayed on the top as "Resource Id".
+
+`ZITADEL_CLIENT_ID`: Having the project `Portal` selected, click on the Application `Web`. `{YourClientID}` is displayed in the top-center, labeled as "Client Id".
+
+`SERVICE_ACCOUNT_ACCESS_TOKEN`: Setup a service user, add a Personal Access Token and copy the secret here (see below)
+
+### Install and run
+
 To run this sample locally you need to install dependencies first.
 
 Type and execute:
@@ -31,7 +57,7 @@ and open [http://localhost:3000](http://localhost:3000) with your browser to see
 
 To setup this sample you have to create a project and an application in your organization (eg, `B2B-Demo`) first.
 
-Open [Console](https://console.zitadel.ch/projects) and create a new project. Let's call it `Project`.
+Open [Console](https://console.zitadel.ch/projects) and create a new project. Let's call it `Portal`.
 
 Then on the project detail page click on new application and enter a name for this app. Let's call this one `portal-web`. Select `Web`, continue, `PKCE`, then enter `http://localhost:3000/api/auth/callback/zitadel` for the redirect, post redirect can be kept empty. Then press on `create`.
 
@@ -40,28 +66,6 @@ Copy the clientId as you will need this in your apps environment configuration f
 On the application detail page click on the section under redirect settings and enable `Development Mode`. This will allow you application to work on `localhost:3000`.
 To read the user data and roles from ID Token, go to the section Token Settings and make sure both checkboxes, `User roles inside ID Token` and `User Info inside ID Token` are enabled.
 Make sure to save your changes.
-
-### Secret
-
-Now clone this project and navigate to its root folder. Create a file `.env.local` and copy paste the following:
-
-```text
-NEXTAUTH_URL=http://localhost:3000                          # Base url of this app (B2B portal)
-ZITADEL_ISSUER=https://{yourDomain}.zitadel.cloud           # Url of your zitadel instance (assuming you're using zitadel.cloud)
-ORG_ID={YourOrgId}                                          # Organization's ID
-PROJECT_ID={YourProjectId}                                  # Project's ID
-ZITADEL_CLIENT_ID={YourClientID}                            # Client's ID for this app (B2B portal)
-SERVICE_ACCOUNT_ACCESS_TOKEN={YourServiceAccountSecret}     # Personal access token for the Service User
-API=https://{yourDomain}.zitadel.cloud                      # Url of the API (same as ZITADEL_ISSUER)
-```
-
-`ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console. `{YourOrgId}` is displayed on top of the organization detail page as "Resource Id".
-
-`PROJECT_ID`: You can find `{YourProjectId}` by clicking on "Projects" in the navigation and select the Project `Portal`. `{YourProjectId}` is displayed on the top as "Resource Id".
-
-`ZITADEL_CLIENT_ID`: Having the project `Portal` selected, click on the Application `Web`. `{YourClientID}` is displayed in the top-center, labeled as "Client Id".
-
-`SERVICE_ACCOUNT_ACCESS_TOKEN`: Setup a service user, add a Personal Access Token and copy the secret here (see below)
 
 ### Service User
 
@@ -85,7 +89,7 @@ To setup the needed roles for your project, navigate to your Portal project, and
 | admin  | Administrator |       | The administrator, allowed to read granted projects and to user grants |
 | reader | Reader        |       | A user who is allowed to read his organizations granted projects only  |
 
-Now in the `General` Sectiom of the Portal project, make sure to enable `Assert Roles on Authentication`. This makes sure that roles, which is used by the application to enable UI components, are set in your OIDC ID Token.
+Now in the `General` section of the Portal project, make sure to enable `Assert Roles on Authentication`. This makes sure that roles, which is used by the application to enable UI components, are set in your OIDC ID Token.
 
 ### Delegate the project to another organization
 
