@@ -31,8 +31,7 @@ export default NextAuth({
       wellKnown: process.env.ZITADEL_ISSUER,
       authorization: {
         params: {
-          scope:
-            "openid email profile urn:zitadel:iam:org:project:id:163706957566443777:aud",
+          scope: `openid email profile urn:zitadel:iam:org:project:id:${process.env.ZITADEL_PROJECT_ID}:aud`,
         },
       },
       idToken: true,

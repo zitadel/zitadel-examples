@@ -12,6 +12,37 @@ function getUserGrants(
       if (isAllowed) {
         const token = process.env.SERVICE_ACCOUNT_ACCESS_TOKEN;
         const request = `${process.env.API}/management/v1/users/grants/_search`;
+
+        const logHeaders = JSON.stringify({
+          "x-zitadel-org": process.env.ORG_ID,
+          "content-type": "application/json",
+        });
+
+        const logBody = JSON.stringify({
+          query: {
+            limit: 100,
+            asc: true,
+          },
+          queries: [
+            {
+              projectIdQuery: {
+                projectId: process.env.PROJECT_ID,
+              },
+            },
+            {
+              withGrantedQuery: {
+                withGranted: true,
+              },
+            },
+          ],
+        });
+
+        console.log(
+          `call to ${process.env.API}/management/v1/users/grants/_search to load ZITADEL user grants.`,
+          "\n",
+          `header: ${logHeaders}, body: ${logBody}`
+        );
+
         return fetch(request, {
           headers: {
             authorization: `Bearer ${token}`,
