@@ -1,3 +1,5 @@
+# ZITADEL B2B Demo
+
 This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business) context, where a company is providing a customer portal to their customers:
 
 - A user of the customer should see all granted projects in the portal ("Service discovery")
@@ -44,11 +46,13 @@ Make sure to save your changes.
 Now clone this project and navigate to its root folder. Create a file `.env.local` and copy paste the following:
 
 ```text
-NEXTAUTH_URL=http://localhost:3000
-ORG_ID={YourOrgId}
-PROJECT_ID={YourProjectId}
-ZITADEL_CLIENT_ID={YourClientID}
-SERVICE_ACCOUNT_SECRET={YourServiceAccountSecret}
+NEXTAUTH_URL=http://localhost:3000                          # Base url of this app (B2B portal)
+ZITADEL_ISSUER=https://{yourDomain}.zitadel.cloud           # Url of your zitadel instance (assuming you're using zitadel.cloud)
+ORG_ID={YourOrgId}                                          # Organization's ID
+PROJECT_ID={YourProjectId}                                  # Project's ID
+ZITADEL_CLIENT_ID={YourClientID}                            # Client's ID for this app (B2B portal)
+SERVICE_ACCOUNT_ACCESS_TOKEN={YourServiceAccountSecret}     # Personal access token for the Service User
+API=https://{yourDomain}.zitadel.cloud                      # Url of the API (same as ZITADEL_ISSUER)
 ```
 
 `ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console. `{YourOrgId}` is displayed on top of the organization detail page as "Resource Id".
