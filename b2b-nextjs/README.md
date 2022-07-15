@@ -48,7 +48,7 @@ NEXTAUTH_URL=http://localhost:3000
 ORG_ID={YourOrgId}
 PROJECT_ID={YourProjectId}
 ZITADEL_CLIENT_ID={YourClientID}
-SERVICE_ACCOUNT_SECRET={YourServiceAccountSecret}
+SERVICE_ACCOUNT_ACCESS_TOKEN={YourServiceAccountAccessToken}
 ```
 
 `ORG_ID`: You can find `{YourOrgId}` by selecting the B2B-Demo organization in Console. `{YourOrgId}` is displayed on top of the organization detail page as "Resource Id".
