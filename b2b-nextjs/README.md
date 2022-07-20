@@ -54,7 +54,7 @@ To make the application work you need a service user which loads granted-project
 In the B2B-Demo organization, navigate to `Users` in navigation of Console, click on `Service Users` and create a new user.
 Let's set its username to `nextjs` and its name to `NextJS`. Then press `create`.
 
-On the detail page of that user, navigate to "Personal Access Tokens" and add a new entry, set an optional expiration date. 
+On the detail page of that user, navigate to "Personal Access Tokens" and add a new entry, set an optional expiration date.
 
 Copy the generated Token as you will need this in your environment configuration file later.
 
@@ -65,23 +65,26 @@ To show granted projects, go to the `Demo-Vendor` organization and add the Servi
 
 ## Step 2: Configuration
 
-Now clone this project and navigate to its root folder. Create a file `.env.local` and copy paste the following:
+Now clone this project and navigate to its root folder.
+Create a file `.env.local` and copy paste the following:
 
 ```text
 NEXTAUTH_URL=http://localhost:3000
 ZITADEL_ISSUER=https://{YourDomain}.zitadel.cloud
+ZITADEL_API=https://{YourDomain}.zitadel.cloud
 ORG_ID={YourOrgId}
 PROJECT_ID={YourProjectId}
 ZITADEL_CLIENT_ID={YourClientID}
 SERVICE_ACCOUNT_ACCESS_TOKEN={YourServiceAccountSecret}
-API=https://{YourDomain}.zitadel.cloud
 ```
 
-Please see below on how to setup ZITADEL and obtain the values.
+Replace the values as follows
 
 `NEXTAUTH_URL`: Base url of this demo app (B2B portal); runs per default on [http://localhost:3000](http://localhost:3000)
 
-`ZITADEL_ISSUER`: The url to your zitadel instance. When using zitadel.cloud for this demo you can find the domain of your ZITADEL instance in the customer portal.
+`ZITADEL_ISSUER`: The url to your zitadel instance. When using zitadel.cloud for this demo you can find the domain of your ZITADEL instance in the customer portal. You can also find this information by going to your application `portal-web` and click 'Urls' in the navigation.
+
+`ZITADEL_API`: URL of the Management API. Typically the same as `ZITADEL_ISSUER`.
 
 `ORG_ID`: We will create an organization during later steps. You can find `{YourOrgId}` by selecting the `Demo-Vendor` organization in Console. `{YourOrgId}` is displayed on top of the organization detail page as "Resource Id".
 
@@ -90,8 +93,6 @@ Please see below on how to setup ZITADEL and obtain the values.
 `ZITADEL_CLIENT_ID`: Having the project `Portal` selected, click on the Application `portal-web`. `{YourClientID}` is displayed in the top-center, labeled as "Resource Id".
 
 `SERVICE_ACCOUNT_ACCESS_TOKEN`: Setup a service user, add a Personal Access Token and copy the secret here (see below).
-
-`API`: URL of the Management API. Typically the same as `ZITADEL_ISSUER`.
 
 ## Step 3: Install and Run
 
