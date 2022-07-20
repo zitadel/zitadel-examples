@@ -7,6 +7,6 @@ module.exports = {
     ZITADEL_ISSUER: process.env.ZITADEL_ISSUER,
     ORG_ID: process.env.ORG_ID,
     PROJECTID: process.env.PROJECT_ID,
-    API: process.env.API,
+    ZITADEL_API: process.env.ZITADEL_API,
   },
 };

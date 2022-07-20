@@ -11,7 +11,7 @@ function getGrantedProjectsOfUser(
     .then((isAllowed) => {
       if (isAllowed) {
         const token = process.env.SERVICE_ACCOUNT_ACCESS_TOKEN;
-        const request = `${process.env.API}/management/v1/projectgrants/_search`;
+        const request = `${process.env.ZITADEL_API}/management/v1/projectgrants/_search`;
 
         const logHeaders = JSON.stringify({
           "x-zitadel-org": process.env.ORG_ID,
@@ -33,7 +33,7 @@ function getGrantedProjectsOfUser(
         });
 
         console.log(
-          `call to ${process.env.API}/management/v1/projectgrants/_search to load ZITADEL project grants`,
+          `call to ${process.env.ZITADEL_API}/management/v1/projectgrants/_search to load ZITADEL project grants`,
           "\n",
           `header: ${logHeaders}, body: ${logBody}`
         );

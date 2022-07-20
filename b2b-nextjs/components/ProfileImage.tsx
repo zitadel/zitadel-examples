@@ -24,7 +24,7 @@ export default function ProfileImage({ user }: { user?: any | null }) {
 
   useEffect(() => {
     fetcher(
-      `${process.env.API}/auth/v1/users/me/sessions/_search`,
+      `${process.env.ZITADEL_API}/auth/v1/users/me/sessions/_search`,
       sessionMap
     ).then((sessions) => {
       if (sessions && sessions.length) {
