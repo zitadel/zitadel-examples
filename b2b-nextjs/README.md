@@ -115,21 +115,36 @@ yarn dev
 
 and open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Step 4: Customer organization
+## Step 4: Create a customer organization
 
-## ZITADEL Setup
+### Customer organization
 
-### Delegate the project to another organization
+Create a new organization in Console. Easiest way is to use the organization dropdown on the top left.
+Let's call this new organization `Demo-Customer`.
 
-Create a new organization in Console. Easiest way is to use the organization dropdown on the top left. Let's call this new organization `B2B-Demo-Customer`.
+### Organization Grant
 
-Switch to the `B2B-Demo` organization, select Projects in the navigation, and click on `Portal` and then `Grants`. [Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `b2b-demo-customer.zitadel.ch`.
+Switch to the `Demo-Vendor` organization, select Projects in the navigation, and click on `Portal` and then `Grants`.
+[Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `demo-customer.{YourDomain}.zitadel.cloud`.
 
-Now switch back to the organization `B2B-Demo-Customer`, [create a new user](https://docs.zitadel.ch/docs/manuals/user-register) in this organization. Select Granted Projects on the left side panel and click on `Portal`. Add an authorization to the newly created user.
+### User Setup
+
+Now switch back to the organization `Demo-Customer` and [create a new user](https://docs.zitadel.ch/docs/manuals/user-register) in this organization.
+Let's call the first user `Alice Admin`. Create a second user called `Eric Employee`.
+
+As you have guessed, these two users need to be authorized. We want to enable Alice to assign roles to users in her organization in self-service. Thus she will get also a Manager Role within ZITADEL.
+
+Navigate to Projects, and in the sub-navigation "Granted Projects".
+Select the project portal `Portal` and navigate to "Authorizations".
+
+Give `Alice Admin` the roles `reader` and `admin`.
+`Eric Employee` will get only the role `reader`.
+
+Now click on the plus on the top right and give `Alice Admin` the Manager Role `Project Grant Owner`.
 
 ### Login
 
-You should be able to login with the user created in the organization `B2B-Demo-Customer`and see all granted projects.
+You should be able to login with the user created in the organization `Demo-Customer`and see all granted projects.
 
 Switch to authorizations to view all users and their roles. You may extend the application here to make role-assignment possible within the portal.
 
@@ -140,19 +155,13 @@ Users with `admin` role can view granted projects and list users of the selected
 
 ![app screen](./public/screenshot.png)
 
-## Step by step walk through
+### 1. Log into as a customer
 
-[![Video walk-through on Youtube](https://i9.ytimg.com/vi/-BVgq3mmxGE/mq3.jpg?sqp=CLihwpQG&rs=AOn4CLCo4vALkRfKSfg8E3wVHBAo30wIbQ)](https://www.youtube.com/embed/-BVgq3mmxGE)
-
-Watch the [Youtube Video](https://www.youtube.com/embed/-BVgq3mmxGE) for a walk-through.
-
-### 1. Validate Setup
-
-Login with your user. You should have no granted projects and no roles in this organization. Log out.
+Login with your user on the customer organization. You should have no granted projects and no roles in this organization.
 
 ### 2. Grant a project
 
-In the `B2B-Demo` delegate access management of the project `Portal` to `B2B-Demo-Customer` as described above. You don't see any other granted projects because the user is not authorized, yet. Log out.
+In the `Demo-Vendor` delegate access management of the project `Portal` to `Demo-Customer` as described above. You don't see any other granted projects because the user is not authorized, yet.
 
 The logout at this step is required as we use only the token's information and don't call the api. This might not be suitable in a production scenario.
 
