@@ -132,19 +132,25 @@ Switch to the `Demo-Vendor` organization, select Projects in the navigation, and
 Now switch back to the organization `Demo-Customer` and [create a new user](https://docs.zitadel.ch/docs/manuals/user-register) in this organization.
 Let's call the first user `Alice Admin`. Create a second user called `Eric Employee`.
 
-As you have guessed, these two users need to be authorized. We want to enable Alice to assign roles to users in her organization in self-service. Thus she will get also a Manager Role within ZITADEL.
-
+As you have guessed, these two users need to be authorized.
 Navigate to Projects, and in the sub-navigation "Granted Projects".
 Select the project portal `Portal` and navigate to "Authorizations".
 
 Give `Alice Admin` the roles `reader` and `admin`.
 `Eric Employee` will get only the role `reader`.
 
-Now click on the plus on the top right and give `Alice Admin` the Manager Role `Project Grant Owner`.
+### Manager Role
+
+We want to enable Alice to assign roles to users in her organization in a self-service manner.
+To make this happen, we need give Alice an [Manager Role](https://docs.zitadel.com/docs/concepts/structure/managers) within the Organization `Demo-Customer`.
+
+Still in the organization `Demo-Customer`, navigate to Organization. Click on the plus on the top right and give `Alice Admin` the Manager Role `Org Owner`.
+
+## Step 5: Create a project grant
 
 ### Login
 
-You should be able to login with the user created in the organization `Demo-Customer`and see all granted projects.
+You should be able to login to the Demo Application with the user created in the organization `Demo-Customer`and see all granted projects.
 
 Switch to authorizations to view all users and their roles. You may extend the application here to make role-assignment possible within the portal.
 
