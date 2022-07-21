@@ -5,6 +5,14 @@ This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business
 - A user of the customer should see all granted projects in the portal ("Service discovery")
 - A admin user of the customers sees a list of customer's users (could be expanded to make roles editable)
 
+
+## What does it do?
+
+Users with `view` role can view granted projects on their organization which were granted by your organization (owning this portal application).
+Users with `admin` role can view granted projects and list users of the selected organization who are granted to use the portal application too.
+
+![app screen](./public/screenshot.png)
+
 ## Step 1: Setup Vendor application and users in ZITADEL
 
 First we need to create an organization that holds the Vendor's users, projects and applications.
@@ -122,22 +130,10 @@ and open [http://localhost:3000](http://localhost:3000) with your browser to see
 Create a new organization in Console. Easiest way is to use the organization dropdown on the top left.
 Let's call this new organization `Demo-Customer`.
 
-### Organization Grant
-
-Switch to the `Demo-Vendor` organization, select Projects in the navigation, and click on `Portal` and then `Grants`.
-[Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `demo-customer.{YourDomain}.zitadel.cloud`.
-
-### User Setup
+### Users
 
 Now switch back to the organization `Demo-Customer` and [create a new user](https://docs.zitadel.ch/docs/manuals/user-register) in this organization.
 Let's call the first user `Alice Admin`. Create a second user called `Eric Employee`.
-
-As you have guessed, these two users need to be authorized.
-Navigate to Projects, and in the sub-navigation "Granted Projects".
-Select the project portal `Portal` and navigate to "Authorizations".
-
-Give `Alice Admin` the roles `reader` and `admin`.
-`Eric Employee` will get only the role `reader`.
 
 ### Manager Role
 
@@ -146,40 +142,36 @@ To make this happen, we need give Alice an [Manager Role](https://docs.zitadel.c
 
 Still in the organization `Demo-Customer`, navigate to Organization. Click on the plus on the top right and give `Alice Admin` the Manager Role `Org Owner`.
 
+Login with your user on the customer organization to validate the setup.
+
 ## Step 5: Create a project grant
+
+### Organization Grant
+
+Switch to the `Demo-Vendor` organization, select Projects in the navigation, and click on `Portal` and then `Grants`.
+[Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `demo-customer.{YourDomain}.zitadel.cloud`.
+
+### Authorization
+
+As you have guessed, these two users need to be authorized.
+On the `Demo-Customer` organization, navigate to Projects and select "Granted Projects" in the sub-navigation.
+Select the project portal `Portal` and navigate to "Authorizations".
+
+Give `Alice Admin` the roles `reader` and `admin`.
+`Eric Employee` will get only the role `reader`.
 
 ### Login
 
-You should be able to login to the Demo Application with the user created in the organization `Demo-Customer`and see all granted projects.
+You should be able to login to the Demo Application with `Alice Admin` and see all granted projects.
 
-Switch to authorizations to view all users and their roles. You may extend the application here to make role-assignment possible within the portal.
+You can log out and log in with `Eric Employee` and you should only have access to the granted projects, but not to the Authorizations tab.
 
-## What does it do?
+## What next
 
-Users with `view` role can view granted projects on their organization which were granted by your organization (owning this portal application).
-Users with `admin` role can view granted projects and list users of the selected organization who are granted to use the portal application too.
+You could create another project (eg, `Data Cube`) and grant that project to the customer organization. The granted project should appear after a reload automatically. This gives you an idea of how you could do Service Discovery with ZITADEL.
 
-![app screen](./public/screenshot.png)
+You could also build out the code (PRs welcome :wink:) for this application, for example:
 
-### 1. Log into as a customer
-
-Login with your user on the customer organization. You should have no granted projects and no roles in this organization.
-
-### 2. Grant a project
-
-In the `Demo-Vendor` delegate access management of the project `Portal` to `Demo-Customer` as described above. You don't see any other granted projects because the user is not authorized, yet.
-
-The logout at this step is required as we use only the token's information and don't call the api. This might not be suitable in a production scenario.
-
-### 3. Authorize a user for the granted project
-
-Grant your user the role `reader` to the granted project `Portal`. Login again. You should see `Portal` in the tab "Granted Projects". You are not allowed to select the tab "Authorization", this is only for admins. You don't need to logout for the next step.
-
-### 4. Grant and authorize another project
-
-In the `B2B-Demo` delegate access management of the project `Data Cube` to `B2B-Demo-Customer` as described above. As soon as you granted the project, authorize your user to that project by assigning some roles. The new project should load on the Portal.
-
-### 5. User Management
-
-Give your user the `admin` role in addition to the `reader` role. Make sure you log off and log back in, to get the roles in the auth token. You should now be able to click on the tab "Authorization" and you see all users with authorization to the project `Portal`.  
-This is how you can build your user management logic on top of the ZITADEL API.
+- Create a mock `datacube-web` application and show how SSO between the portal and the application works with ZITADEL.
+- Implement a feature in the Authorization tab to assign roles directly from the customer portal.
+- ...
