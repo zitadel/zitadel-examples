@@ -186,14 +186,5 @@ You can now check wheter the user is authenticated with `$oidc.isAuthenticated` 
 
 ## Completion
 
-You have successfully integrated your Angular application with ZITADEL!
-
-If you get stuck, consider checking out our [example](https://github.com/zitadel/zitadel-examples/tree/main/angular) application. It includes all the mentioned functionality of this quickstart. You can simply start by cloning the repository and replacing the _AuthConfig_ in the _AppModule_ by your own configuration. If you run into issues, contact us or raise an issue on [GitHub](https://github.com/zitadel/zitadel).
-
-![App in console](/img/angular/app-screen.png)
-
-## What's next?
-
-Now that you have enabled authentication, it's time to add authorization to your application using ZITADEL APIs. Refer to the [docs](../../apis/introduction) or check out our ZITADEL Console code on [GitHub](https://github.com/zitadel/zitadel) which is using gRPC to access data.
-
-For more information about creating an Angular application, refer to [Angular](https://angular.io/start) and for more information about the OAuth/OIDC library used above, consider reading their docs at [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc).
+You have successfully integrated your Vue application with ZITADEL!
+If you run into issues, contact us or raise an issue on [GitHub](https://github.com/zitadel/zitadel).
