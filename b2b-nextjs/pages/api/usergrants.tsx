@@ -38,6 +38,8 @@ function getUserGrants(
         });
 
         console.log(
+          new Date().toLocaleString(),
+          "\n",
           `call to ${process.env.ZITADEL_API}/management/v1/users/grants/_search to load ZITADEL user grants.`,
           "\n",
           `header: ${logHeaders}, body: ${logBody}`

@@ -33,6 +33,8 @@ function getGrantedProjectsOfUser(
         });
 
         console.log(
+          new Date().toLocaleString(),
+          "\n",
           `call to ${process.env.ZITADEL_API}/management/v1/projectgrants/_search to load ZITADEL project grants`,
           "\n",
           `header: ${logHeaders}, body: ${logBody}`

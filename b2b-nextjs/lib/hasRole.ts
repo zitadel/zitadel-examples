@@ -11,7 +11,7 @@ export function hasRole(
 }
 
 export function getRolesFromUserInfo(authHeader): Promise<any> {
-  const userInfoEndpoint = `${process.env.ZITADEL_ISSUER}/oidc/v1/userinfo`;
+  const userInfoEndpoint = `${process.env.NEXT_PUBLIC_ZITADEL_ISSUER}/oidc/v1/userinfo`;
 
   return (
     fetch(userInfoEndpoint, {

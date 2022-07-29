@@ -5,7 +5,6 @@ This is a demo showcasing how you can use ZITADEL in a B2B (Business-to-Business
 - A user of the customer should see all granted projects in the portal ("Service discovery")
 - A admin user of the customers sees a list of customer's users (could be expanded to make roles editable)
 
-
 ## What does it do?
 
 Users with `view` role can view granted projects on their organization which were granted by your organization (owning this portal application).
@@ -32,8 +31,7 @@ Open the Console (`https://{YourDomain}.zitadel.cloud/ui/console/projects`) and 
 
 Then on the project detail page click on new application and enter a name for this app.
 Let's call this one `portal-web`.
-Select `Web`, continue, `PKCE`, then enter `http://localhost:3000/api/auth/callback/zitadel` for the redirect, post redirect can be kept empty.
-Then press on `create`.
+Select `Web`, continue, `PKCE`, then enter `http://localhost:3000/api/auth/callback/zitadel` for the redirect, and `http://localhost:3000` for the post redirect. Then press on `create`.
 
 Copy the "Resource Id" of the project `Portal` as you will need this in your environment configuration file later.
 
@@ -78,7 +76,7 @@ Create a file `.env.local` and copy paste the following:
 
 ```text
 NEXTAUTH_URL=http://localhost:3000
-ZITADEL_ISSUER=https://{YourDomain}.zitadel.cloud
+NEXT_PUBLIC_ZITADEL_ISSUER=https://{YourDomain}.zitadel.cloud
 ZITADEL_API=https://{YourDomain}.zitadel.cloud
 ORG_ID={YourOrgId}
 PROJECT_ID={YourProjectId}
@@ -91,7 +89,7 @@ Replace the values as follows
 
 `NEXTAUTH_URL`: Base url of this demo app (B2B portal); runs per default on [http://localhost:3000](http://localhost:3000)
 
-`ZITADEL_ISSUER`: The url to your zitadel instance. When using zitadel.cloud for this demo you can find the domain of your ZITADEL instance in the customer portal. You can also find this information by going to your application `portal-web` and click 'Urls' in the navigation.
+`NEXT_PUBLIC_ZITADEL_ISSUER`: The url to your zitadel instance. When using zitadel.cloud for this demo you can find the domain of your ZITADEL instance in the customer portal. You can also find this information by going to your application `portal-web` and click 'Urls' in the navigation. The variable is prefixed with `NEXT_PUBLIC_` such that it can be accessed from the client.
 
 `ZITADEL_API`: URL of the Management API. Typically the same as `ZITADEL_ISSUER`.
 
@@ -132,7 +130,7 @@ Let's call this new organization `Demo-Customer`.
 
 ### Users
 
-Now switch back to the organization `Demo-Customer` and [create a new user](https://docs.zitadel.ch/docs/manuals/user-register) in this organization.
+Now switch back to the organization `Demo-Customer` and [create a new user](https://docs.zitadel.com/docs/manuals/user-register) in this organization.
 Let's call the first user `Alice Admin`. Create a second user called `Eric Employee`.
 
 ### Manager Role
@@ -149,7 +147,7 @@ Login with your user on the customer organization to validate the setup.
 ### Organization Grant
 
 Switch to the `Demo-Vendor` organization, select Projects in the navigation, and click on `Portal` and then `Grants`.
-[Grant all roles of the Project](https://docs.zitadel.ch/docs/guides/basics/projects#exercise---grant-a-project) to the organization `demo-customer.{YourDomain}.zitadel.cloud`.
+[Grant all roles of the Project](https://docs.zitadel.com/docs/guides/basics/projects#exercise---grant-a-project) to the organization `demo-customer.{YourDomain}.zitadel.cloud`.
 
 ### Authorization
 
