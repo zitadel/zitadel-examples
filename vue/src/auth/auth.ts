@@ -1,8 +1,7 @@
 import { createOidcAuth, LogLevel, SignInType } from 'vue-oidc-client/vue3';
 
-const VUE_APP_ZITADEL_AUTHORITY = "https://bringmos-jv1jqo.zitadel.app/";
-const VUE_APP_ZITADEL_CLIENT_ID = "169824185969869057@vue";
-// note the ending '/'
+const ZITADEL_ISSUER = "https://example-jv1jqo.zitadel.cloud/";
+const ZITADEL_CLIENT_ID = "169824185969869057@vue";
 const appUrl = "http://localhost:3000/";
 
 const mainOidc = createOidcAuth(
@@ -10,11 +9,10 @@ const mainOidc = createOidcAuth(
   SignInType.Window,
   appUrl,
   {
-    authority: VUE_APP_ZITADEL_AUTHORITY,
-    client_id: VUE_APP_ZITADEL_CLIENT_ID,
+    authority: ZITADEL_ISSUER,
+    client_id: ZITADEL_CLIENT_ID,
     response_type: "code",
     scope: "openid profile email",
-    // prompt: "login",
   },
   console,
   LogLevel.Debug
