@@ -8,7 +8,7 @@ First, we start by creating a new Vue app with `create-vue`, the official projec
 npm init vue@latest
 ```
 
-# Install Authentication library
+## Install Authentication library
 
 To keep the template as easy as possible we use [vue-oidc-client](https://github.com/soukoku/vue-oidc-client) as our main authentication library. To install, run:
 
@@ -24,7 +24,7 @@ npm run dev
 
 then open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-# Configuration
+## Configuration
 
 To setup your configuration, create a file called [auth].ts in `src/auth`.
 
@@ -74,7 +74,7 @@ ZITADEL_ISSUER=[yourIssuerUrl]
 ZITADEL_CLIENT_ID=[yourClientId]
 ```
 
-# Protected Routes
+## Protected Routes
 
 We use the /about page to display user information. To ensure the /about page is protected add a `meta: {authName: auth.authName }` to the routes array.
 
@@ -105,13 +105,13 @@ auth.useRouter(router);
 export default router;
 ```
 
-# Modify main.ts
+## Modify main.ts
 
 To make the example app function properly, you have to modify the main.ts and call `startup()` of the previously created auth file.
 Note that to access auth information in your components, you have to add the line `app.config.globalProperties.$oidc = mainOidc;`.
 You can then later access the information from the view `AboutView.vue`
 
-## main.ts
+### main.ts
 
 ```ts
 import "./assets/main.css";
@@ -139,7 +139,7 @@ mainOidc.startup().then((ok) => {
 });
 ```
 
-## AboutView.vue
+### AboutView.vue
 
 ```vue
 <template>
@@ -183,3 +183,17 @@ export default {
 ```
 
 You can now check wheter the user is authenticated with `$oidc.isAuthenticated` and call the `$oidc.signOut` function to log the user out.
+
+## Completion
+
+You have successfully integrated your Angular application with ZITADEL!
+
+If you get stuck, consider checking out our [example](https://github.com/zitadel/zitadel-examples/tree/main/angular) application. It includes all the mentioned functionality of this quickstart. You can simply start by cloning the repository and replacing the _AuthConfig_ in the _AppModule_ by your own configuration. If you run into issues, contact us or raise an issue on [GitHub](https://github.com/zitadel/zitadel).
+
+![App in console](/img/angular/app-screen.png)
+
+## What's next?
+
+Now that you have enabled authentication, it's time to add authorization to your application using ZITADEL APIs. Refer to the [docs](../../apis/introduction) or check out our ZITADEL Console code on [GitHub](https://github.com/zitadel/zitadel) which is using gRPC to access data.
+
+For more information about creating an Angular application, refer to [Angular](https://angular.io/start) and for more information about the OAuth/OIDC library used above, consider reading their docs at [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc).
