@@ -84,7 +84,7 @@ class Nav extends React.Component<Props, State> {
 
             <li className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white">
               <a
-                href="https://console.zitadel.ch"
+                href={`${process.env.NEXT_PUBLIC_ZITADEL_ISSUER}/ui/console`}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center h-14 relative px-4 text-sm"

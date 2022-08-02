@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { BearerToken, hasRole, requestAccessToken } from '../../lib/jwt';
+import { hasRole } from '../../lib/hasRole';
 import { handleFetchErrors } from '../../lib/middleware';
 
 function getGrantedProjectsOfUser(
@@ -10,34 +10,60 @@ function getGrantedProjectsOfUser(
   return hasRole("reader", orgId, authorizationHeader)
     .then((isAllowed) => {
       if (isAllowed) {
-        return requestAccessToken().then((token: BearerToken) => {
-          const request = `https://api.zitadel.ch/management/v1/projectgrants/_search`;
-          return fetch(request, {
-            headers: {
-              authorization: `Bearer ${token.access_token}`,
-              "x-zitadel-org": process.env.ORG_ID,
-              "content-type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify({
-              query: {
-                limit: 100,
-                asc: true,
-              },
-              queries: [
-                {
-                  grantedOrgIdQuery: {
-                    grantedOrgId: orgId,
-                  },
-                },
-              ],
-            }),
-          })
-            .then(handleFetchErrors)
-            .then((resp) => {
-              return resp.json();
-            });
+        const token = process.env.SERVICE_ACCOUNT_ACCESS_TOKEN;
+        const request = `${process.env.ZITADEL_API}/management/v1/projectgrants/_search`;
+
+        const logHeaders = JSON.stringify({
+          "x-zitadel-org": process.env.ORG_ID,
+          "content-type": "application/json",
         });
+
+        const logBody = JSON.stringify({
+          query: {
+            limit: 100,
+            asc: true,
+          },
+          queries: [
+            {
+              grantedOrgIdQuery: {
+                grantedOrgId: orgId,
+              },
+            },
+          ],
+        });
+
+        console.log(
+          new Date().toLocaleString(),
+          "\n",
+          `call to ${process.env.ZITADEL_API}/management/v1/projectgrants/_search to load ZITADEL project grants`,
+          "\n",
+          `header: ${logHeaders}, body: ${logBody}`
+        );
+        return fetch(request, {
+          headers: {
+            authorization: `Bearer ${token}`,
+            "x-zitadel-org": process.env.ORG_ID,
+            "content-type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            query: {
+              limit: 100,
+              asc: true,
+            },
+            queries: [
+              {
+                grantedOrgIdQuery: {
+                  grantedOrgId: orgId,
+                },
+              },
+            ],
+          }),
+        })
+          .then(handleFetchErrors)
+          .then((resp) => {
+            return resp.json();
+          });
       } else {
         throw new Error("not allowed");
       }

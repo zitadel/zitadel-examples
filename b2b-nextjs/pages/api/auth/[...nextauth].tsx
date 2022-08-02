@@ -1,28 +1,38 @@
 import NextAuth from 'next-auth';
 
 export default NextAuth({
-  session: {
-    jwt: true,
-    maxAge: 0.5 * 24 * 60 * 60,
-  },
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
       if (profile?.sub) {
         token.sub = profile.sub;
       }
-      if (account?.accessToken) {
-        token.accessToken = account.accessToken;
+      if (account?.access_token) {
+        token.accessToken = account.access_token;
       }
+      token.idToken ??= account?.id_token;
       if (typeof user !== typeof undefined) {
         token.user = user;
       }
       return token;
     },
-    session: async function session({ session, token }) {
-      session.accessToken = token.accessToken;
-      session.id = token.id;
-      session.sub = token.sub;
-      session.user = token.user;
+    async session({
+      session,
+      token: {
+        id,
+        sub,
+        user,
+        error: tokenError,
+        accessToken,
+        idToken: idToken,
+      },
+    }) {
+      session.accessToken = accessToken;
+      session.id = id;
+      session.sub = sub;
+      session.user = user;
+      session.idToken = idToken;
+      session.error = tokenError;
+
       return session;
     },
   },
@@ -31,32 +41,32 @@ export default NextAuth({
       id: "zitadel",
       name: "zitadel",
       type: "oauth",
-      version: "2.0",
-      scope:
-        "openid profile email urn:zitadel:iam:org:project:id:69234237810729019:aud",
-      params: { grant_type: "authorization_code" },
-      authorizationParams: {
-        grant_type: "authorization_code",
-        response_type: "code",
+      version: "2",
+      wellKnown: process.env.NEXT_PUBLIC_ZITADEL_ISSUER,
+      authorization: {
+        params: {
+          scope: `openid email profile urn:zitadel:iam:org:project:id:${process.env.ZITADEL_PROJECT_ID}:aud`,
+        },
       },
-      accessTokenUrl: "https://api.zitadel.ch/oauth/v2/token",
-      requestTokenUrl: "https://api.zitadel.ch/oauth/v2/token",
-      authorizationUrl: "https://accounts.zitadel.ch/oauth/v2/authorize",
-      profileUrl: "https://api.zitadel.ch/oauth/v2/userinfo",
-      checks: "pkce",
-      async profile(profile: any, tokens) {
-        const prof = {
+      idToken: true,
+      checks: ["pkce", "state"],
+      client: {
+        token_endpoint_auth_method: "none",
+      },
+      async profile(profile) {
+        return {
           id: profile.sub,
           name: profile.name,
+          firstName: profile.given_name,
+          lastName: profile.family_name,
           email: profile.email,
+          loginName: profile.preferred_username,
           image: profile.picture,
           roles: profile["urn:zitadel:iam:org:project:roles"],
-          preferred_username: profile.preferred_username,
         };
-        return prof;
       },
-      clientId: process.env.ZITADEL_CLIENT_ID ?? "",
-      clientSecret: "",
+
+      clientId: process.env.ZITADEL_CLIENT_ID,
     },
   ],
 });

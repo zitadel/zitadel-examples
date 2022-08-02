@@ -36,7 +36,7 @@ export default function OrgContext() {
     const org = orgStore.getState().org;
 
     fetcher(
-      "https://api.zitadel.ch/auth/v1/global/projectorgs/_search",
+      `${process.env.ZITADEL_API}/auth/v1/global/projectorgs/_search`,
       orgMap
     ).then((orgs) => {
       if (!org && orgs && orgs.length) {

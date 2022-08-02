@@ -1,6 +1,7 @@
 import { Menu, Transition } from '@headlessui/react';
 import { LogoutIcon, PencilIcon } from '@heroicons/react/outline';
-import { getSession, signIn, signOut } from 'next-auth/react';
+import { getSession, signIn, signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 export default function ProfileImage({ user }: { user?: any | null }) {
@@ -20,11 +21,28 @@ export default function ProfileImage({ user }: { user?: any | null }) {
       .then(cb);
   };
 
+  const router = useRouter();
+
+  const { data: session } = useSession();
+  const { idToken } = session as any;
+
+  const logout = async () => {
+    await signOut({ callbackUrl: "/" });
+    const url =
+      `${process.env.NEXT_PUBLIC_ZITADEL_ISSUER}/oidc/v1/end_session?` +
+      new URLSearchParams({
+        id_token_hint: idToken,
+        post_logout_redirect_uri: "http://localhost:3000",
+      });
+
+    return router.push(url);
+  };
+
   const [sessions, setSessions] = useState<any[]>([]);
 
   useEffect(() => {
     fetcher(
-      "https://api.zitadel.ch/auth/v1/users/me/sessions/_search",
+      `${process.env.ZITADEL_API}/auth/v1/users/me/sessions/_search`,
       sessionMap
     ).then((sessions) => {
       if (sessions && sessions.length) {
@@ -57,7 +75,7 @@ export default function ProfileImage({ user }: { user?: any | null }) {
             />
           ) : (
             <span className="text-sm">
-              {user ? user.name.substring(0, 1) : "A"}
+              {user && user.name ? user.name.substring(0, 1) : "A"}
             </span>
           )}
         </Menu.Button>
@@ -80,7 +98,13 @@ export default function ProfileImage({ user }: { user?: any | null }) {
             <Menu.Item>
               {({ active }) => (
                 <a
-                  href="https://console.zitadel.ch/users/me"
+                  href={`${
+                    process.env.NEXT_PUBLIC_ZITADEL_ISSUER
+                  }/ui/console/users/me${
+                    user?.loginName
+                      ? `?login_hint=${encodeURIComponent(user.loginName)}`
+                      : ""
+                  }`}
                   target="_blank"
                   rel="noreferrer"
                   className={`${
@@ -138,7 +162,7 @@ export default function ProfileImage({ user }: { user?: any | null }) {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  onClick={() => signOut()}
+                  onClick={() => logout()}
                   className={`${
                     active ? "bg-zitadelaccent-800 text-white" : "text-gray-300"
                   } group flex rounded-md justify-center items-center w-full px-2 py-2 text-sm`}

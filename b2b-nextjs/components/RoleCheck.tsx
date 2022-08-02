@@ -1,27 +1,17 @@
-import { useSession } from "next-auth/react";
-import { useContext } from "react";
+import { useSession } from 'next-auth/react';
+import { useContext } from 'react';
 
-import orgStore from "../lib/org";
+import roleStore from '../lib/roles';
 
 export default function RolesCheck(props: any) {
   const { data: session } = useSession();
-  const org = orgStore((state) => (state as any).org);
+  const roles = roleStore((state) => (state as any).roles);
 
   const hasRoles = !!(
-    org &&
-    org.id &&
-    session &&
-    session.user &&
-    session.user.roles &&
-    (props.requiredRole
-      ? session.user.roles[props.requiredRole] &&
-        session.user.roles[props.requiredRole][org.id]
-      : Object.keys(session.user.roles).findIndex((role) => {
-          return session.user.roles[role][org.id];
-        }) > -1)
+    roles && (props.requiredRole ? roles.includes(props.requiredRole) : true)
   );
 
-  return session && session.accessToken && hasRoles
+  return session && hasRoles
     ? props.children
     : props.fallback || (
         <div className="max-w-7xl mx-auto px-6 py-10">
