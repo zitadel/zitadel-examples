@@ -1,7 +1,7 @@
 import { createOidcAuth, LogLevel, SignInType } from 'vue-oidc-client/vue3';
 
-const ZITADEL_ISSUER = "https://example-jv1jqo.zitadel.cloud/";
-const ZITADEL_CLIENT_ID = "169824185969869057@vue";
+const ZITADEL_ISSUER = "https:/[your-domain]-[random-string].zitadel.cloud";
+const ZITADEL_CLIENT_ID = "YOUR-CLIENT-ID";
 const appUrl = "http://localhost:3000/";
 
 const mainOidc = createOidcAuth(
