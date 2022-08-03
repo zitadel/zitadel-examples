@@ -1,20 +1,19 @@
-import './assets/main.css';
+import "./assets/main.css";
 
-import { createPinia } from 'pinia';
-import { createApp } from 'vue';
+import { createApp } from "vue";
 
-import App from './App.vue';
-import mainOidc from './auth/auth';
-import router from './router';
+import App from "./App.vue";
+import mainOidc from "./auth/auth";
+import router from "./router";
+import type { OidcAuth } from "vue-oidc-client/vue3";
 
 mainOidc.startup().then((ok) => {
   if (ok) {
     const app = createApp(App);
 
-    app.use(createPinia());
     app.use(router);
 
-    app.config.globalProperties.$oidc = mainOidc;
+    app.config.globalProperties.$oidc = mainOidc as OidcAuth;
 
     app.mount("#app");
   } else {

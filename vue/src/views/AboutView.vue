@@ -28,7 +28,7 @@ export default {
       if (this.user) {
         return Object.keys(this.user).map((key) => ({
           key,
-          value: this.user[key],
+          value: (this.user as any)[key],
         }));
       }
       return [];
