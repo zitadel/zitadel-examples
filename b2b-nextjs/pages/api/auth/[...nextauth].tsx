@@ -36,6 +36,7 @@ export default NextAuth({
       return session;
     },
   },
+  debug: true,
   providers: [
     {
       id: "zitadel",
@@ -45,7 +46,7 @@ export default NextAuth({
       wellKnown: process.env.NEXT_PUBLIC_ZITADEL_ISSUER,
       authorization: {
         params: {
-          scope: `openid email profile urn:zitadel:iam:org:project:id:${process.env.ZITADEL_PROJECT_ID}:aud`,
+          scope: `openid email profile urn:zitadel:iam:org:project:id:zitadel:aud`,
         },
       },
       idToken: true,
