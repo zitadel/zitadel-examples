@@ -36,6 +36,7 @@ export default NextAuth({
       return session;
     },
   },
+  debug: true,
   providers: [
     {
       id: "zitadel",
