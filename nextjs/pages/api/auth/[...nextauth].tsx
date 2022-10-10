@@ -1,35 +1,12 @@
-import NextAuth from 'next-auth';
+import NextAuth from "next-auth";
+import ZitadelProvider from "next-auth/providers/zitadel";
 
 export default NextAuth({
   providers: [
-    {
-      id: "zitadel",
-      name: "zitadel",
-      type: "oauth",
-      version: "2",
-      wellKnown: process.env.ZITADEL_ISSUER,
-      authorization: {
-        params: {
-          scope: "openid email profile",
-        },
-      },
-      idToken: true,
-      checks: ["pkce", "state"],
-      client: {
-        token_endpoint_auth_method: "none",
-      },
-      async profile(profile) {
-        return {
-          id: profile.sub,
-          name: profile.name,
-          firstName: profile.given_name,
-          lastName: profile.family_name,
-          email: profile.email,
-          loginName: profile.preferred_username,
-          image: profile.picture,
-        };
-      },
+    ZitadelProvider({
+      issuer: process.env.ZITADEL_ISSUER,
       clientId: process.env.ZITADEL_CLIENT_ID,
-    },
+      clientSecret: process.env.ZITADEL_CLIENT_SECRET,
+    }),
   ],
 });

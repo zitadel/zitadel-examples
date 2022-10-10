@@ -32,29 +32,32 @@ then open [http://localhost:3000](http://localhost:3000) with your browser to se
 
 NextAuth.js exposes a REST API which is used by your client.
 To setup your configuration, create a file called [...nextauth].tsx in `pages/api/auth`.
+You can directly import our ZITADEL provider from [next-auth](https://next-auth.js.org/providers/zitadel)
 
 ```ts
 import NextAuth from "next-auth";
+import ZitadelProvider from "next-auth/providers/zitadel";
 
 export default NextAuth({
   providers: [
-    {
-      id: "zitadel",
-      name: "zitadel",
-      type: "oauth",
-      version: "2",
-      wellKnown: process.env.ZITADEL_ISSUER,
-      authorization: {
-        params: {
-          scope: "openid email profile",
-        },
-      },
-      idToken: true,
-      checks: ["pkce", "state"],
-      client: {
-        token_endpoint_auth_method: "none",
-      },
-      async profile(profile) {
+    ZitadelProvider({
+      issuer: process.env.ZITADEL_ISSUER,
+      clientId: process.env.ZITADEL_CLIENT_ID,
+      clientSecret: process.env.ZITADEL_CLIENT_SECRET,
+    }),
+  ],
+});
+```
+
+you can overwrite the default callbacks too, just append them to the ZITADEL provider.
+
+```ts
+...
+ZitadelProvider({
+    issuer: process.env.ZITADEL_ISSUER,
+    clientId: process.env.ZITADEL_CLIENT_ID,
+    clientSecret: process.env.ZITADEL_CLIENT_SECRET,
+    async profile(profile) {
         return {
           id: profile.sub,
           name: profile.name,
@@ -64,11 +67,9 @@ export default NextAuth({
           loginName: profile.preferred_username,
           image: profile.picture,
         };
-      },
-      clientId: process.env.ZITADEL_CLIENT_ID,
     },
-  ],
-});
+}),
+...
 ```
 
 We recommend using the Authentication Code flow secured by PKCE for the Authentication flow.
@@ -91,7 +92,10 @@ You can find your Issuer Url on the application detail page in console.
 NEXTAUTH_URL=http://localhost:3000
 ZITADEL_ISSUER=[yourIssuerUrl]
 ZITADEL_CLIENT_ID=[yourClientId]
+ZITADEL_CLIENT_SECRET=[randomvalue]
 ```
+
+next-auth requires a secret for all providers, so just define a random value here.
 
 # User interface
 
