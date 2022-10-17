@@ -7,11 +7,6 @@ This repo provides examples of how you can integrate different languages and fra
 - Authentication Code Flow with PKCE
 - Fetch data from userinfo endpoint
 
-## [NextJS](./nextjs)
-
-- Authentication Code Flow with PKCE
-- Fetch data from userinfo endpoint
-
 ## [NextJS B2B](./b2b-nextjs)
 
 - Authentication Code Flow with PKCE
