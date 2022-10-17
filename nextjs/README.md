@@ -73,7 +73,7 @@ ZitadelProvider({
 ```
 
 We recommend using the Authentication Code flow secured by PKCE for the Authentication flow.
-To be able to connect to ZITADEL, navigate to your [Console Projects](https://console.zitadel.ch/projects) create or select an existing project and add your app selecting WEB, then PKCE, and then add `http://localhost:3000/api/auth/callback/zitadel` as redirect url to your app.
+To be able to connect to ZITADEL, navigate to your Console Projects, create or select an existing project and add your app selecting WEB, then PKCE, and then add `http://localhost:3000/api/auth/callback/zitadel` as redirect url to your app.
 
 For simplicity reasons we set the default to the one that next-auth provides us. You'll be able to change the redirect later if you want to.
 
@@ -93,6 +93,7 @@ NEXTAUTH_URL=http://localhost:3000
 ZITADEL_ISSUER=[yourIssuerUrl]
 ZITADEL_CLIENT_ID=[yourClientId]
 ZITADEL_CLIENT_SECRET=[randomvalue]
+NEXTAUTH_SECRET=[randomvalue]
 ```
 
 next-auth requires a secret for all providers, so just define a random value here.
