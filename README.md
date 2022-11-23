@@ -1,6 +1,6 @@
-# ZITADEL integration examples
+# ZITADEL integration examples (outdated)
 
-This repo provides examples of how you can integrate different languages and frameworks with ZITADEL.
+> This example repo is outdated and is no longer going to be maintained. New examples are moved to seperate repositories. Take a look at the [Docs](https://docs.zitadel.com/docs/examples/introduction) or use the [GitHub filter](https://github.com/search?q=topic%3Aexamples+org%3Azitadel) to find the new ones.
 
 ## [Angular](./angular)
 
